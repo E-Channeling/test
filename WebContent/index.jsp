@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hello World</title>
+    <title>Welcome</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -33,21 +33,6 @@
                         <div class="site-branding d-flex align-items-center">
                            <a class="d-block" href="index.jsp" rel="home"><img class="d-block" src="images/logo.png" alt="logo"></a>
                         </div><!-- .site-branding -->
-
-                        <nav class="site-navigation d-flex justify-content-end align-items-center">
-                            <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
-                                <li class="current-menu-item"><a href="index.jsp">Home</a></li>
-                                <li><a href="#">About us</a></li>
-                                <li><a href="#">Services</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Contact</a></li>
-
-                                <!--  class="call-btn button gradient-bg mt-3 mt-md-0">
-                                    <a class="d-flex justify-content-center align-items-center" href="#"><img src="images/emergency-call.png"> +34 586 778 8892</a>
-                                </li-->
-                            </ul>
-                        </nav><!-- .site-navigation -->
-
                         <div class="hamburger-menu d-lg-none">
                             <span></span>
                             <span></span>
@@ -69,116 +54,21 @@
                                     <header class="entry-header">
                                         <h1>The Best Way<br>Appoiment Doctor</h1>
                                     </header><!-- .entry-header -->
-												
-												
-<div class="text-center">
-  
-</div>								
-												
-												
-												
-                                    <!--div class="entry-content mt-4">
-                                        <p>fast way appoiment doctor</p>
-                                    </div--><!-- .entry-content -->
-
-                                    <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
-                                        <a href="#" class="button gradient-bg" data-toggle="modal" data-target="#modalLoginForm">Admin Login</a>
-                                        <a href="#" class="button gradient-bg" data-toggle="modal" data-target="#modalLoginForm">Doctor Login</a> 
-                                        <a href="#" class="button gradient-bg" data-toggle="modal" data-target="#modalLoginForm">Patient Login</a>
-                                    </footer><!-- .entry-footer -->
+                                        <a href="adminLogin.jsp" class="button gradient-bg">Admin Login</a>
+                                        <a href="doctorLogin.jsp" class="button gradient-bg">Doctor Login</a> 
+                                        <a href="patientLogin.jsp" class="button gradient-bg" >Patient Login</a>
                                 </div><!-- .col -->
                             </div><!-- .row -->
                         </div><!-- .container -->
                     </div><!-- .hero-content-overlay -->
                 </div><!-- .hero-content-wrap -->
-
-
-
-                
-
             <div class="pagination-wrap position-absolute w-100">
                 <div class="swiper-pagination d-flex flex-row flex-md-column"></div>
             </div><!-- .pagination-wrap -->
         </div><!-- .hero-slider -->
     </header><!-- .site-header -->
 
-			<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-			  aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header text-center">
-			        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body mx-3">
-			        <div class="md-form mb-5">
-			          <i class="fas fa-envelope prefix grey-text"></i>
-			          <input type="email" id="defaultForm-email" class="form-control validate">
-			          <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
-			        </div>
 			
-			        <div class="md-form mb-4">
-			          <i class="fas fa-lock prefix grey-text"></i>
-			          <input type="password" id="defaultForm-pass" class="form-control validate">
-			          <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
-			        </div>
-			
-			      </div>
-			      <div class="modal-footer d-flex justify-content-center">
-			        <button class="btn btn-default">Login</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-
-    <footer class="site-footer">
-        <div class="footer-widgets">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="foot-about">
-                            <h2><a href="#"><img src="images/logo.png" alt=""></a></h2>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
-
-                            <p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                        </div><!-- .foot-about -->
-                    </div><!-- .col -->
-
-                    <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
-                        <div class="foot-contact">
-                            <h2>Contact</h2>
-
-                            <ul class="p-0 m-0">
-                                <li><span>Addtress:</span>Mitlton Str. 26-27 London UK</li>
-                                <li><span>Phone:</span>+53 345 7953 32453</li>
-                                <li><span>Email:</span>yourmail@gmail.com</li>
-                            </ul>
-                        </div>
-                    </div><!-- .col -->
-
-                    <div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
-                        <div class="foot-links">
-                            <h2>Usefull Links</h2>
-
-                            <ul class="p-0 m-0">
-                                <li><a href="index.jsp">Home</a></li>
-                                <li><a href="about.html">About us</a></li>
-                                <li><a href="#">Departments</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="news.html">FAQ</a></li>
-                                <li><a href="services.html">Testimonials</a></li>
-                            </ul>
-                        </div><!-- .foot-links -->
-                    </div><!-- .col -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-        </div><!-- .footer-widgets -->
-    </footer><!-- .site-footer -->
 
     <script type='text/javascript' src='js/jquery.js'></script>
     <script type='text/javascript' src='js/jquery.collapsible.min.js'></script>
