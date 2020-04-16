@@ -9,21 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.test.model.Doctor;
 import com.test.model.Patient;
 import com.test.service.PatientService;
+import com.test.service.iDoctorService;
+import com.test.serviceImpl.DoctorServiceImpl;
 import com.test.serviceImpl.PatientServiceImpl;
 
 /**
- * Servlet implementation class AddPatient
+ * Servlet implementation class AddDoctorServlet
  */
-@WebServlet("/AddPatient")
-public class AddPatientServlet extends HttpServlet {
+@WebServlet("/AddDoctorServlet")
+public class AddDoctorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddPatientServlet() {
+    public AddDoctorServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,29 +43,27 @@ public class AddPatientServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		
-		Patient patient = new Patient();
+		Doctor doctor = new Doctor();
 		
-		patient.setfName(request.getParameter("fName"));
-		patient.setlName(request.getParameter("lName"));
-		patient.setDOB(request.getParameter("DOB"));
-		patient.setPhoneNo(request.getParameter("phoneNo"));
-		patient.setAddress(request.getParameter("address"));
-		patient.setGender(request.getParameter("gender"));
-		patient.setEmail(request.getParameter("email"));
-		patient.setPassword(request.getParameter("password"));
+		doctor.setDoctorRegID(request.getParameter("docId"));
+		doctor.setName(request.getParameter("name"));
+		doctor.setSpecialized(request.getParameter("specialized"));
+		doctor.setGender(request.getParameter("gender"));
+		doctor.setContactNo(request.getParameter("phoneNo"));
+		doctor.setHospital(request.getParameter("hospital"));
+		doctor.setEmail(request.getParameter("email"));
+		doctor.setPassword(request.getParameter("password"));
 		
 		System.out.println("test");
-		PatientService patientService = new PatientServiceImpl();
-		patientService.addPatient(patient);
+		iDoctorService doctorService = new DoctorServiceImpl();
+		doctorService.addDoctor(doctor);
 		System.out.println("test 1");
-		request.setAttribute("patient", patient);
+		request.setAttribute("doctor", doctor);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientLogin.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorLogin.jsp");
 		dispatcher.forward(request, response);
-		
 	}
 
 }

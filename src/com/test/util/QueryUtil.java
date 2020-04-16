@@ -31,5 +31,74 @@ public class QueryUtil extends CommonUtil{
 		}
 		return element.getTextContent().trim();
 	}
+	
+	
+	/*
+	 * query for patient
+	 */
+	
+	public static String insertPatient(){
+		
+		String query = "          	insert into patient (fName, lName, DOB, gender, phoneNo, address, email, password) \n" + 
+				"          	values (?, ?, ?, ?, ?, ?, ?, ?)";
+		return query;
+	}
+	
+	
+	public static String createPatientTable(){
+	
+	String query = "       CREATE TABLE patient(\n" + 
+			"            	id bigint not null AUTO_INCREMENT,\n" + 
+			"				fName varchar(70) not null,\n" + 
+			"				lName varchar(70) not null,\n" + 
+			"				DOB date not null,\n" + 
+			"				gender varchar(10) DEFAULT 'Male',\n" + 
+			"				phoneNo char(10),\n" + 
+			"				address varchar(255),\n" + 
+			"				email varchar(30) not null,\n" + 
+			"				password varchar(12) not null,\n" + 
+			"				primary key (id)\n" + 
+			"			)        ";
+	return query;
+	}
+	
+	public static String dropPatientTable(){
+		
+	String query = "DROP TABLE IF EXISTS patient ";
+	return query;
+	}
+	
+	/*
+	 * query for Doctor
+	 */
+	
+	public static String createDoctorTable() {
+		String query = "	            CREATE TABLE doctor(\n" + 
+				"            	reg_id varchar(10) not null unique,\n" + 
+				"				Name varchar(70) not null,\n" + 
+				"				specialized varchar(50) not null,\n" + 
+				"				gender varchar(10) DEFAULT 'Male',\n" + 
+				"				contactNo char(10),\n" + 
+				"				hospital varchar(255),\n" + 
+				"				email varchar(30) not null,\n" + 
+				"				password varchar(12) not null,\n" + 
+				"				primary key (reg_id)\n" + 
+				"			)";
+		return query;
+	}
+	
+	public static String dropDoctorTable() {
+		String query = "DROP TABLE IF EXISTS doctor";
+		return query;
+	}
+	
+	public static String insertDoctor(){
+		
+		String query = "          	insert into doctor (reg_id, Name, specialized, gender, contactNo, hospital, email, password) \n" + 
+				"          	values (?, ?, ?, ?, ?, ?, ?, ?)";
+		return query;
+	}
+	
+	
 
 }

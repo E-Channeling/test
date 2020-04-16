@@ -29,7 +29,7 @@
 	</query>
 
 	<!-- Select all customer orders Query -->
-	<query id="insert_employee">
+	<query id="insert_patient">
         <![CDATA[
           	insert into patient (fName, lName, DOB, gender, phoneNo, address, email, password) 
           	values (?, ?, ?, ?, ?, ?, ?, ?)

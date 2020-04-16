@@ -1,27 +1,20 @@
 package com.test.serviceImpl;
 
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import com.test.model.Patient;
-import com.test.service.PatientService;
+import com.test.model.Doctor;
+import com.test.service.iDoctorService;
 import com.test.util.CommonConstants;
 import com.test.util.DBConnectionUtil;
 import com.test.util.QueryUtil;
 
-public class PatientServiceImpl implements PatientService {
-
+public class DoctorServiceImpl implements iDoctorService {
+	
 	/** Initialize logger */
 	public static final Logger log = Logger.getLogger(PatientServiceImpl.class.getName());
 
@@ -43,18 +36,17 @@ public class PatientServiceImpl implements PatientService {
 			statement = connection.createStatement();
 			// Drop table if already exists and as per SQL query available in
 			// Query.xml
-			statement.executeUpdate(QueryUtil.dropPatientTable());
+			statement.executeUpdate(QueryUtil.dropDoctorTable());
 			// Create new patient table as per SQL query available in
 			// Query.xml
-			statement.executeUpdate(QueryUtil.createPatientTable());
+			statement.executeUpdate(QueryUtil.createDoctorTable());
 
 		} catch (SQLException | ClassNotFoundException e) {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
-
-	@Override
-	public void addPatient(Patient patient) {
+	
+	public void addDoctor(Doctor doctor) {
 		try {
 			connection = DBConnectionUtil.getDBConnection();
 			/*
@@ -63,18 +55,18 @@ public class PatientServiceImpl implements PatientService {
 			 */
 			
 			preparedStatement = connection
-					.prepareStatement(QueryUtil.insertPatient());
+					.prepareStatement(QueryUtil.insertDoctor());
 			connection.setAutoCommit(false);
 			
 			
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, patient.getfName());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, patient.getlName());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, patient.getDOB());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_FOUR, patient.getGender());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_FIVE, patient.getPhoneNo());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_SIX, patient.getAddress());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_SEVEN, patient.getEmail());
-			preparedStatement.setString(CommonConstants.COLUMN_INDEX_EIGHT, patient.getPassword());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, doctor.getDoctorRegID());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, doctor.getName());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, doctor.getSpecialized());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_FOUR, doctor.getGender());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_FIVE, doctor.getContactNo());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_SIX, doctor.getHospital());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_SEVEN, doctor.getEmail());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_EIGHT, doctor.getPassword());
 			// Add employee
 			preparedStatement.execute();
 			connection.commit();
@@ -99,32 +91,9 @@ public class PatientServiceImpl implements PatientService {
 			}
 		}
 		
-	}
-
-	@Override
-	public Patient getPatientByID(String patientID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Patient> getPatient() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Patient updatePatient(String employeeID, Patient employee) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removePatient(String patientID) {
-		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+
 
 }

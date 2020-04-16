@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
 <head>
 <title>Welcome</title>
 
@@ -37,8 +40,9 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 </head>
+</head>
 <body>
-	<header class="site-header">
+<header class="site-header">
 		<div class="nav-bar">
 			<div class="container">
 				<div class="row">
@@ -55,7 +59,36 @@
 					</div>
 					<!-- .col -->
 				</div>
-				<!-- .row -->
+				<form method="post" class="form-signup" target="_self"
+					action="AddDoctorServlet"
+					style="border-radius: 10px; padding: 30px; background-color: white; box-shadow: 2px 2px 2px 2px rgb(194, 194, 194); width: 50%; margin: 20px;">
+					<h1>Doctor Register</h1>
+					<label>Doctor registetion ID</label> <input type="text" class="form-control"
+						placeholder="Doctor registetion ID" required autofocus name="docId">
+					<label>Name</label> <input type="text" class="form-control"
+						placeholder="Name" required autofocus name="name"> <label>specialized
+						of Birth</label> <input type="text" class="form-control" placeholder="specialized"
+						required autofocus name="specialized"> <label>Gender</label> <input
+						type="text" class="form-control" placeholder="Gender" required
+						autofocus name="gender"> <label>Phone Number</label> <input
+						type="number" class="form-control" placeholder="Phone Number"
+						required autofocus name="phoneNo"> <label>hospital</label>
+					<input type="text" class="form-control" placeholder="hospital"
+						required autofocus name="hospital"> <label>Email
+						address</label> <input type="email" class="form-control"
+						placeholder="Email address" required autofocus name="email">
+					<label for="inputPassword">Password</label> <input type="password"
+						class="form-control" placeholder="Password" required
+						name="password">
+					<div class="checkbox mb-3">
+						<label> <a id="fpwd" href="#" style="color: red">forgot
+								password</a>
+						</label>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+						in</button>
+					</br> <a id="fpwd" href="patientLogin.jsp">Login</a>
+				</form>
 			</div>
 			<!-- .container -->
 		</div>
@@ -70,36 +103,8 @@
 							<div class="row h-100">
 								<div
 									class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
-									<header class="entry-header">
-										<h1>
-											Doctor Login
-										</h1>
-									</header>
-										<form  class="form-signin" target="_self" action=""> 
-									        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-									        
-									        <label for="inputEmail" class="sr-only">Email address</label>
-									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-									        <label for="inputPassword" class="sr-only">Password</label></br>
-									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-									        <div class="checkbox mb-3">
-									        <label>
-									            <a id="fpwd" href="#">forget password</a>
-									        </label>
-									      </div>
-									      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></br>
-									      <a id="fpwd" href="DoctorRegister.jsp">Register</a>
-									    </form>
-									    
+									
 									<div class="text-center"></div>
-									<!--div class="entry-content mt-4">
-                                        <p>fast way appoiment doctor</p>
-                                    </div-->
-									<!-- .entry-content -->
-									<footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
-										
-									</footer>
-									<!-- .entry-footer -->
 								</div>
 								<!-- .col -->
 							</div>
@@ -115,43 +120,10 @@
 				</div>
 				<!-- .pagination-wrap -->
 			</div>
-			<!-- .hero-slider -->
 	</header>
 	<!-- .site-header -->
 
-	<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header text-center">
-					<h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body mx-3">
-					<div class="md-form mb-5">
-						<i class="fas fa-envelope prefix grey-text"></i> <input
-							type="email" id="defaultForm-email" class="form-control validate">
-						<label data-error="wrong" data-success="right"
-							for="defaultForm-email">Your email</label>
-					</div>
 
-					<div class="md-form mb-4">
-						<i class="fas fa-lock prefix grey-text"></i> <input
-							type="password" id="defaultForm-pass"
-							class="form-control validate"> <label data-error="wrong"
-							data-success="right" for="defaultForm-pass">Your password</label>
-					</div>
-
-				</div>
-				<div class="modal-footer d-flex justify-content-center">
-					<button class="btn btn-default">Login</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<script type='text/javascript' src='js/jquery.js'></script>
@@ -162,5 +134,6 @@
 	<script type='text/javascript' src='js/jquery.countTo.min.js'></script>
 	<script type='text/javascript' src='js/jquery.barfiller.js'></script>
 	<script type='text/javascript' src='js/custom.js'></script>
+
 </body>
 </html>

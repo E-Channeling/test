@@ -29,13 +29,31 @@ public class DBConnectionUtil extends CommonUtil {
 		 * This create new connection objects when connection is closed or it is
 		 * null
 		 */
-		if (connection == null || connection.isClosed()) {
-
-			Class.forName(properties.getProperty(CommonConstants.DRIVER_NAME));
-			connection = DriverManager.getConnection(properties.getProperty(CommonConstants.URL),
-					properties.getProperty(CommonConstants.USERNAME), properties.getProperty(CommonConstants.PASSWORD));
-		}
-		return connection;
+		Connection con = null;
+		 String url = "jdbc:mysql://127.0.0.1:3306/TESTING"; //MySQL URL followed by the database name
+		 String username = "chathura123"; //MySQL username
+		 String  password = "Cha0703091504*"; //MySQL password
+		 
+		 try 
+		 {
+			 try 
+			 {
+				Class.forName("com.mysql.jdbc.Driver"); //loading MySQL drivers. This differs for database servers 
+			 } 
+			 catch (ClassNotFoundException e)
+			 {
+				e.printStackTrace();
+			 }
+			 
+			 con = DriverManager.getConnection(url, username, password); //attempting to connect to MySQL database
+			 System.out.println("Printing connection object "+con);
+		 } 
+		 catch (Exception e) 
+		 {
+			e.printStackTrace();
+		 }
+		 return con; 
+		 }
 	}
 
-}
+
