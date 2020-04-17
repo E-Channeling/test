@@ -78,13 +78,20 @@
 									</header>
 										<form method="post"  class="form-signin" target="_self" action="LoginPatientServlet" style="border-radius: 10px; padding: 30px;background-color: white;box-shadow: 2px 2px 2px 2px rgb(194, 194, 194);width: 100%"> 
 									        <center><i class="fa fa-user-circle" style="font-size:66px;color:blue"></i></center></br>
+									        <label style="color:red">
+									        <% 
+									        	if(request.getAttribute("error") != null) {
+									            	out.println(request.getAttribute("error"));
+									        	}
+									        %>
+									        </label>
 									        <label for="inputEmail" class="sr-only">Email address</label>
 									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
 									        <label for="inputPassword" class="sr-only">Password</label>
 									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name= "password" required>
 									        <div class="checkbox mb-3">
 									        <label>
-									            <a id="fpwd" href="#" style="color: red">forgot password</a>
+									            <a id="fpwd" href="#" style="color: blue">forgot password</a>
 									        </label>
 									      </div>
 									      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></br>

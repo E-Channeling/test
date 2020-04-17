@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,16 +48,22 @@ public class LoginPatientServlet extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String password = getMd5(request.getParameter("password"));
+		String err = "Incorect email or password";
+		
 		
 		PatientService patientService = new PatientServiceImpl();
 		
 		if(patientService.loginValidate(email, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
-			response.sendRedirect("doctorLogin.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientHome.jsp");
+			dispatcher.forward(request, response);
 		}
-		else 
-			response.sendRedirect("patientLogin.jsp");
+		else {
+			request.setAttribute("error", err);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientLogin.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 	
 	public static String getMd5(String input) 
