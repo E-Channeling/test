@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- by Menuka Madhusanka  SQL queries -->
+<Querys>
+
+	<!-- Create table patient Query -->
+	<query id="create_patient_table">
+        <![CDATA[
+            CREATE TABLE patient(
+            	id bigint not null AUTO_INCREMENT,
+				fName varchar(70) not null,
+				lName varchar(70) not null,
+				DOB date not null,
+				gender varchar(10) DEFAULT 'Male',
+				phoneNo char(10),
+				address varchar(255),
+				email varchar(30) not null,
+				password varchar(50) not null,
+				primary key (id)
+			)
+        ]]>
+	</query>
+
+	<!-- DROP TABLE patient Query -->
+	<query id="drop_table">
+         <![CDATA[        
+            DROP TABLE IF EXISTS patient 
+        ]]>
+	</query>
+
+	<!-- insert patient Query -->
+	<query id="insert_patient">
+        <![CDATA[
+          	insert into patient (fName, lName, DOB, gender, phoneNo, address, email, password) 
+          	values (?, ?, ?, ?, ?, ?, ?, ?)
+        ]]>
+	</query>
+	
+	<!-- Select patient by email and password Query -->
+	<query id="employee_by_email_and_password">
+         <![CDATA[        
+            select * from patient where patient.email = ? and  patient.password = ?
+        ]]>
+	</query>
+
+	<!-- Select a particular employee by id Query -->
+	<query id="employee_by_id">
+         <![CDATA[        
+            select * from patient where patient.id = ?
+        ]]>
+	</query>
+
+	<!-- Select all employees -->
+	<query id="all_employees">
+         <![CDATA[        
+            select * from patient
+        ]]>
+	</query>
+
+	<!-- Delete a particular employee by id Query -->
+	<query id="remove_employee">
+         <![CDATA[        
+            delete from patient where patient.id = ?
+        ]]>
+	</query>
+	
+	<!-- Update a particular employee by id Query >
+	< query id="update_employee">
+         <![CDATA[        
+            update employee as e 
+            set e.employeeName = ?, e.designation = ?, e.faculty = ?, e.department = ?, e.address = ?, e.qualifications = ?, e.gender = ? 
+            where e.employeeID = ?
+        ]]>
+	</query>
+	
+	<query id="employee_ids">
+         <![CDATA[        
+            select e.employeeID from employee as e
+        ]]>
+	</query-->
+
+</Querys>
