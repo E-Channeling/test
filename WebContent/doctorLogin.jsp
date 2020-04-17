@@ -75,13 +75,13 @@
 											Doctor Login
 										</h1>
 									</header>
-										<form  class="form-signin" target="_self" action=""> 
+										<form  class="form-signin" target="_self" action="LoginDoctorServlet" method = "POST"> 
 									        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 									        
 									        <label for="inputEmail" class="sr-only">Email address</label>
-									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+									        <input type="email"  class="form-control" placeholder="Email address" required autofocus name= "email">
 									        <label for="inputPassword" class="sr-only">Password</label></br>
-									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+									        <input type="password"  class="form-control" placeholder="Password" required name="password">
 									        <div class="checkbox mb-3">
 									        <label>
 									            <a id="fpwd" href="#">forget password</a>

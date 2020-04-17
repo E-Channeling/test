@@ -4,6 +4,7 @@ package com.test.serviceImpl;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -123,6 +124,36 @@ public class PatientServiceImpl implements PatientService {
 	public void removePatient(String patientID) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static boolean login(Patient patient) {
+		
+		boolean status = false;
+		Connection con = null;
+		PreparedStatement preparedStatement = null;
+	
+try {
+
+
+con = DBConnectionUtil.getDBConnection();
+    
+	preparedStatement  = con
+    .prepareStatement(QueryUtil.selectpatient());
+    preparedStatement.setString(1, patient.getEmail());
+    preparedStatement.setString(2, patient.getPassword());
+    System.out.println("methanata awa");
+    System.out.println(preparedStatement);
+    ResultSet rs = preparedStatement.executeQuery();
+    status = rs.next();
+    System.out.println(status);
+
+
+} catch (SQLException | ClassNotFoundException e) {
+    // process sql exception
+    System.out.println(e);
+}
+
+return status;
 	}
 	
 	

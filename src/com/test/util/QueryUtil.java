@@ -68,6 +68,11 @@ public class QueryUtil extends CommonUtil{
 	return query;
 	}
 	
+	public static String selectpatient() {
+		String query = "select * from patient where email = ? and password = ? ";
+		return query;
+	}
+	
 	/*
 	 * query for Doctor
 	 */
@@ -96,6 +101,10 @@ public class QueryUtil extends CommonUtil{
 		
 		String query = "          	insert into doctor (reg_id, Name, specialized, gender, contactNo, hospital, email, password) \n" + 
 				"          	values (?, ?, ?, ?, ?, ?, ?, ?)";
+		return query;
+	}
+	public static String selectDoctor() {
+		String query = "select * from doctor where email = ? and password = ? ";
 		return query;
 	}
 	
