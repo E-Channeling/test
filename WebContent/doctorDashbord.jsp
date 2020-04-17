@@ -40,8 +40,10 @@
                             <ul class="d-flex flex-column flex-lg-row justify-content-lg-end align-items-center">
                                 <li class="current-menu-item">
                                 <a href="index.jsp">HOME</a></li>
+                                <li><a href="listPatients.jsp">patient Details</a></li>
+                                <li><a href="patientTreatment.jsp">Treatments</a></li>
                                  <li><a href="bookingRequest.jsp">Booking Request</a></li>
-                                 <li><a href="patientFeedback.jsp">patient Feedback</a></li>
+                                 <li><a href="listpatientFeedback.jsp">patient Feedback</a></li>
                                 <li><a href="doctorProfile.jsp">Profile</a></li>
                                <li><a href="index.jsp">Log Out</a></li>
                                 

@@ -8,23 +8,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
-import com.test.model.Doctor;
+import com.test.model.Treatment;
+import com.test.service.iDoctorService;
+import com.test.service.iTreatmentService;
 import com.test.serviceImpl.DoctorServiceImpl;
+import com.test.serviceImpl.TreatmentServiceImpl;
 
 /**
- * Servlet implementation class LoginDoctorServlet
+ * Servlet implementation class TreatmentServlet
  */
-@WebServlet("/LoginDoctorServlet")
-public class LoginDoctorServlet extends HttpServlet {
+@WebServlet("/AddTreatmentServlet")
+public class AddTreatmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginDoctorServlet() {
+    public AddTreatmentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,25 +44,27 @@ public class LoginDoctorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        System.out.println("data set una");
-        Doctor doctor = new Doctor();
-        doctor.setEmail(email);
-        doctor.setPassword(password);
+		response.setContentType("text/html");
+		
+		Treatment treatment = new Treatment();
+		
+		treatment.setPetinatId(request.getParameter("patientId"));
+		treatment.setDoctorId(request.getParameter("docId"));
+		treatment.setTratmentDescription(request.getParameter("description"));
+		treatment.setDateOfTreatment(request.getParameter("tratmentDate"));
 
-        if (DoctorServiceImpl.login(doctor)) {
-        	System.out.println(response);
-		    //HttpSession session = request.getSession();
-		    // session.setAttribute("username",username);
-        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorDashbord.jsp");
-    		dispatcher.forward(request, response);
-    		
-		} else {
-		    HttpSession session = request.getSession();
-		    //session.setAttribute("user", username);
-		    //response.sendRedirect("login.jsp");
-		}
+		
+		System.out.println("test");
+		iTreatmentService treatmentService = new TreatmentServiceImpl();
+		treatmentService.addTreatment(treatment);
+		System.out.println("test 1");
+		request.setAttribute("treatment", treatment);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorDashbord.jsp");
+		dispatcher.forward(request, response);
+	}
+		
+		
 	}
 
-}
+

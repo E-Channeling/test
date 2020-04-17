@@ -72,6 +72,15 @@ public class QueryUtil extends CommonUtil{
 		String query = "select * from patient where email = ? and password = ? ";
 		return query;
 	}
+	public static String selectallPatient() {
+		String query = "select * from patient";
+		return query;
+	}
+	public static String getPatientById() {
+		String qurey ="select * from patient where patient.email = ?"; 
+		return qurey;
+	}
+	
 	
 	/*
 	 * query for Doctor
@@ -107,6 +116,78 @@ public class QueryUtil extends CommonUtil{
 		String query = "select * from doctor where email = ? and password = ? ";
 		return query;
 	}
+
+	/*
+	 * query for Treatment Table
+	 */
+	
+	
+	public static String createTreatmentTable() {
+		String query = "          					CREATE TABLE treatment(\n" + 
+				"                id bigint not null AUTO_INCREMENT,\n" + 
+				"                patient_id bigint not null,\n" + 
+				"            	doc_id varchar(10) not null ,\n" + 
+				"				description varchar(200) not null,\n" + 
+				"				date varchar(10) ,\n" + 
+				"				\n" + 
+				"                CONSTRAINT FK_doc_id FOREIGN KEY (doc_id)\n" + 
+				"				REFERENCES doctor(reg_id),\n" + 
+				"                CONSTRAINT FK_patient_id FOREIGN KEY (patient_id)\n" + 
+				"				REFERENCES patient(id),\n" + 
+				"				primary key (id)\n" + 
+				"			)";
+		return query;
+	}
+	
+	public static String dropTreatmentTable() {
+		String query = "DROP TABLE IF EXISTS treatment";
+		return query;
+	}
+	
+	public static String insertTreatment() {
+		String query = "          	insert into treatment (patient_id, doc_id, description, date) \n" + 
+				"          	values (?, ?, ?, ?)";
+		return query;
+	}
+	
+	/*
+	 * query for FeedBack Table
+	 */
+	public static String createFeedBackTable() {
+		String query = "            CREATE TABLE feedback(\n" + 
+				"								feedback_id bigint not null AUTO_INCREMENT,\n" + 
+				"								patient_id bigint not null,\n" + 
+				"								doc_id varchar(10) not null ,\n" + 
+				"								description varchar(200) not null,\n" + 
+				"								CONSTRAINT FK_doc_id_feddback FOREIGN KEY (doc_id)\n" + 
+				"								REFERENCES doctor(reg_id),\n" + 
+				"								CONSTRAINT FK_patient_id_feddback FOREIGN KEY (patient_id) \n" + 
+				"								REFERENCES patient(id),\n" + 
+				"								primary key (feedback_id,patient_id,doc_id)\n" + 
+				"                                )";
+		return query;
+	}
+	public static String dropFeedBackTable() {
+		String query = "DROP TABLE IF EXISTS feedback";
+		return query;
+	}
+	public static String insertFeedBack() {
+		String query = "          	insert into feedback (patient_id, doc_id, description) \n" + 
+				"          	values (?, ?, ?)";
+		return query;
+	}
+	public static String selectAllFeedback() {
+		String query = "select * from feedback";
+		return query;
+	}
+	public static String getFeedbackById() {
+		String qurey ="select * from feedback where feedback.id = ?"; 
+		return qurey;
+	}
+	
+
+
+
 	
 	
 

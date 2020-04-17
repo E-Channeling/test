@@ -15,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+
 import com.test.model.Patient;
 import com.test.service.PatientService;
 import com.test.util.CommonConstants;
@@ -108,10 +109,74 @@ public class PatientServiceImpl implements PatientService {
 		return null;
 	}
 
+	
 	@Override
 	public ArrayList<Patient> getPatient() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return actionOnPatient(null);
+	}
+	
+	
+	private ArrayList<Patient> actionOnPatient(String email) {
+		
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+			/*
+			 * Before fetching employee it checks whether employee ID is
+			 * available
+			 */
+			if (email != null && !email.isEmpty()) {
+				/*
+				 * Get employee by ID query will be retrieved from
+				 * EmployeeQuery.xml
+				 */
+				preparedStatement = connection
+						.prepareStatement(QueryUtil.getPatientById());
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_FOUR, email);
+			}
+			/*
+			 * If employee ID is not provided for get employee option it display
+			 * all employees
+			 */
+			else {
+				preparedStatement = connection
+						.prepareStatement(QueryUtil.selectallPatient());
+			}
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Patient patient = new Patient();
+				patient.setfName(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+				patient.setlName(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+				patient.setPassword(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
+				patient.setEmail(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
+				patient.setDOB(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
+				patient.setGender(resultSet.getString(CommonConstants.COLUMN_INDEX_SIX));
+				patient.setAddress(resultSet.getString(CommonConstants.COLUMN_INDEX_SEVEN));
+				patient.setPhoneNo(resultSet.getString(CommonConstants.COLUMN_INDEX_EIGHT));
+				patientList.add(patient);
+			}
+
+		} catch (SQLException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		return patientList;
 	}
 
 	@Override
@@ -128,33 +193,33 @@ public class PatientServiceImpl implements PatientService {
 
 	public static boolean login(Patient patient) {
 		
-		boolean status = false;
-		Connection con = null;
-		PreparedStatement preparedStatement = null;
+			boolean status = false;
+			Connection con = null;
+			PreparedStatement preparedStatement = null;
 	
-try {
-
-
-con = DBConnectionUtil.getDBConnection();
-    
-	preparedStatement  = con
-    .prepareStatement(QueryUtil.selectpatient());
-    preparedStatement.setString(1, patient.getEmail());
-    preparedStatement.setString(2, patient.getPassword());
-    System.out.println("methanata awa");
-    System.out.println(preparedStatement);
-    ResultSet rs = preparedStatement.executeQuery();
-    status = rs.next();
-    System.out.println(status);
-
-
-} catch (SQLException | ClassNotFoundException e) {
-    // process sql exception
-    System.out.println(e);
-}
-
-return status;
-	}
+				try {
+				
+				
+				con = DBConnectionUtil.getDBConnection();
+				    
+					preparedStatement  = con
+				    .prepareStatement(QueryUtil.selectpatient());
+				    preparedStatement.setString(1, patient.getEmail());
+				    preparedStatement.setString(2, patient.getPassword());
+				    System.out.println("methanata awa");
+				    System.out.println(preparedStatement);
+				    ResultSet rs = preparedStatement.executeQuery();
+				    status = rs.next();
+				    System.out.println(status);
+				
+				
+				} catch (SQLException | ClassNotFoundException e) {
+				    // process sql exception
+				    System.out.println(e);
+				}
+				
+				return status;
+					}
 	
 	
 

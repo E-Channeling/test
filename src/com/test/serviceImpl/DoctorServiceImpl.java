@@ -113,6 +113,7 @@ con = DBConnectionUtil.getDBConnection();
     System.out.println("methanata awa");
     System.out.println(preparedStatement);
     ResultSet rs = preparedStatement.executeQuery();
+    System.out.println(rs);
     status = rs.next();
     System.out.println(status);
 
