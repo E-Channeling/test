@@ -21,6 +21,7 @@
 Email <input type="text" name="email" value=${email} readonly ><br>
 category <input type="text" name="category" value=${category} readonly ><br>
 hospital <input type="text" name="hospital" value=${hospital} readonly ><br>
+Patient Id<input type="text" name="patientId"><br>
 
 	<select name="doctorName">
   <%
@@ -31,7 +32,7 @@ hospital <input type="text" name="hospital" value=${hospital} readonly ><br>
 				
 	%>
 		<option><%=doctor.getName() %></option>
-		<input type="hidden" name="docId" value ="<%=doctor.getDoctorRegID() %>">
+		<input type="text" name="docId" value ="<%=doctor.getDoctorRegID() %>" readonly>
 	<%
 			}
 	%>

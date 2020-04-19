@@ -30,10 +30,10 @@ public class FeedbackServiceImpl implements iFeedBackService {
 
 	static{
 		//create table or drop if exist
-		createTreatmentTable();
+		createFeedBackTable();
 	}
 	
-	public static void createTreatmentTable() {
+	public static void createFeedBackTable() {
 		
 		try {
 			connection = DBConnectionUtil.getDBConnection();

@@ -30,7 +30,7 @@ public class DBConnectionUtil extends CommonUtil {
 		 * null
 		 */
 		Connection con = null;
-		 String url = "jdbc:mysql://127.0.0.1:3306/TESTING"; //MySQL URL followed by the database name
+		 String url = "jdbc:mysql://127.0.0.1:3306/TESTING1"; //MySQL URL followed by the database name
 		 String username = "chathura123"; //MySQL username
 		 String  password = "Cha0703091504*"; //MySQL password
 		 

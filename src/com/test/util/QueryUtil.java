@@ -221,7 +221,13 @@ public class QueryUtil extends CommonUtil{
 				"           category varchar(20) not null,\n" + 
 				"         	hospital varchar(20) not null,\n" + 
 				"           description varchar(100),\n" + 
-				"			primary key (booking_id)\n" + 
+				"			patient_id bigint not null,\n "+
+				"			doc_id varchar(10) not null ,\n" + 
+				"			CONSTRAINT FK_patient_id_booking FOREIGN KEY (patient_id) \n" + 
+				"			REFERENCES patient(id),\n" + 
+				"			CONSTRAINT FK_doc_id_booking FOREIGN KEY (doc_id)\n" + 
+				"			REFERENCES doctor(reg_id),\n" + 
+				"			primary key (booking_id,patient_id,doc_id)\n" + 
 				"                                )";
 		return query;
 	}
@@ -233,8 +239,8 @@ public class QueryUtil extends CommonUtil{
 	}
 
 	public static String insertbooking() {
-		String query = "          	insert into booking (patient_email, doctor_name, bookingDate,category,hospital,description) \n" + 
-				"          	values (?, ?,?,?,?,?)";
+		String query = "          	insert into booking (patient_email, doctor_name, bookingDate,category,hospital,description,patient_id,doc_id) \n" + 
+				"          	values (?, ?,?,?,?,?,?,?)";
 		return query;
 	}
 	
@@ -244,12 +250,10 @@ public class QueryUtil extends CommonUtil{
 	public static String createMapBookingTable() {
 		String query = "    CREATE TABLE mapBooking(\n" + 
 				"			booking_id bigint not null AUTO_INCREMENT,"+
-				"			patient_email varchar(50) not null,\n" + 
+				"			patient_email varchar(50) ,\n" + 
 				"			doc_id varchar(10) not null ,\n" + 
 				"			CONSTRAINT FK_doc_id_Mapbooking FOREIGN KEY (doc_id)\n" + 
 				"			REFERENCES doctor(reg_id),\n" + 
-				"			CONSTRAINT FK_patient_email_Mapbooking FOREIGN KEY (patient_email)\n" + 
-				"			REFERENCES patient(email),\n" + 
 				"			CONSTRAINT FK_booking_id_Mapbooking FOREIGN KEY (booking_id)\n" + 
 				"			REFERENCES booking(booking_id),\n" + 
 				"			primary key (booking_id,patient_email,doc_id)\n" + 

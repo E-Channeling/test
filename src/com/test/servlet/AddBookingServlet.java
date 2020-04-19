@@ -13,6 +13,7 @@ import com.test.model.Booking;
 import com.test.service.iBookService;
 import com.test.serviceImpl.BookServiceImpl;
 
+
 /**
  * Servlet implementation class AddBookingServlet
  */
@@ -41,22 +42,25 @@ public class AddBookingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Booking booking = new Booking();
-		
+	
 		
 		booking.setEmail(request.getParameter("email"));
 		booking.setCategory(request.getParameter("category"));
 		booking.setHospital(request.getParameter("hospital"));
+		booking.setPatientId(request.getParameter("patientId"));
 		booking.setDoctorId(request.getParameter("doctorName"));
 		booking.setDoctorName(request.getParameter("docId"));
 		booking.setBookingDate(request.getParameter("date"));
 		booking.setDescription(request.getParameter("description"));
-
+		
 		
 		System.out.println("test");
 		iBookService bookService = new BookServiceImpl();
 		bookService.addBooking(booking);
 		System.out.println("test 1");
 		request.setAttribute("booking", booking);
+		
+
 		
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientDashbord.jsp");

@@ -32,9 +32,9 @@ public class BookServiceImpl implements iBookService {
 	static{
 		//create table or drop if exist
 		createBookingTable();
-		createMapBookingTable();
+		
 	}
-	
+
 	public static void createBookingTable() {
 		
 		try {
@@ -51,22 +51,7 @@ public class BookServiceImpl implements iBookService {
 			log.log(Level.SEVERE, e.getMessage());
 		}
 	}
-	public static void createMapBookingTable() {
-		
-		try {
-			connection = DBConnectionUtil.getDBConnection();
-			statement = connection.createStatement();
-			// Drop table if already exists and as per SQL query available in
-			// Query.xml
-			statement.executeUpdate(QueryUtil.dropMapBookingTable());
-			// Create new patient table as per SQL query available in
-			// Query.xml
-			statement.executeUpdate(QueryUtil.createMapBookingTable());
 
-		} catch (SQLException | ClassNotFoundException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}
-	}
 	
 	public void addBooking(Booking booking) {
 		try {
@@ -80,31 +65,24 @@ public class BookServiceImpl implements iBookService {
 				.prepareStatement(QueryUtil.insertbooking());
 		connection.setAutoCommit(false);
 		
-		
+		System.out.println(booking.getPatientId());
+		System.out.println(booking.getDoctorId());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, booking.getEmail());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, booking.getDoctorName());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, booking.getBookingDate());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_FOUR, booking.getCategory());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_FIVE, booking.getHospital());
 		preparedStatement.setString(CommonConstants.COLUMN_INDEX_SIX, booking.getDescription());
+		preparedStatement.setString(CommonConstants.COLUMN_INDEX_SEVEN, booking.getPatientId());
+		System.out.println("methanata awa");
+		preparedStatement.setString(CommonConstants.COLUMN_INDEX_EIGHT, booking.getDoctorId());
 		
 		
 		// Add employee
 		preparedStatement.execute();
 		connection.commit();
 		System.out.println("palaweni eaka iwarai");
-		preparedStatement1 = connection
-				.prepareStatement(QueryUtil.inserMaptbooking());
-		connection.setAutoCommit(false);
-		
-		
-		preparedStatement1.setString(CommonConstants.COLUMN_INDEX_ONE, booking.getEmail());
-		preparedStatement1.setString(CommonConstants.COLUMN_INDEX_TWO, booking.getDoctorId());
-		
-		
-		// Add employee
-		preparedStatement1.execute();
-		connection.commit();
+	
 		System.out.println("data waduna");
 
 	} catch (SQLException | ClassNotFoundException e) {

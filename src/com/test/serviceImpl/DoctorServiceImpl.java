@@ -32,12 +32,12 @@ public class DoctorServiceImpl implements iDoctorService {
 
 	static{
 		//create table or drop if exist
-		createPatientTable();
+		createDoctorTable();
 	}
 	
 	private PreparedStatement preparedStatement;
 	
-	public static void createPatientTable() {
+	public static void createDoctorTable() {
 
 		try {
 			connection = DBConnectionUtil.getDBConnection();
