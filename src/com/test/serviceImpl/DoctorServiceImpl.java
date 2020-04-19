@@ -5,14 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.test.model.Doctor;
+import com.test.model.Patient;
 import com.test.service.iDoctorService;
 import com.test.util.CommonConstants;
 import com.test.util.DBConnectionUtil;
 import com.test.util.QueryUtil;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 public class DoctorServiceImpl implements iDoctorService {
 	
@@ -127,6 +134,210 @@ return status;
 
 }
 
+
+			public ArrayList<Doctor> getCurrentDoctor(String email){
+//				HttpSession session=request.getSession();  
+//				String email=(String)session.getAttribute("email");
+				
+				return actionOnGetCurrentDoctor(email);
+			}
+			
+			private ArrayList<Doctor> actionOnGetCurrentDoctor(String email){
+				
+				ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
+				try {
+					connection = DBConnectionUtil.getDBConnection();
+					/*
+					 * Before fetching employee it checks whether employee ID is
+					 * available
+					 */
+					if (email != null && !email.isEmpty()) {
+						/*
+						 * Get employee by ID query will be retrieved from
+						 * EmployeeQuery.xml
+						 */
+						preparedStatement = connection
+								.prepareStatement(QueryUtil.getDoctorById());
+						preparedStatement.setString(CommonConstants.COLUMN_INDEX_EIGHT, email);
+					}
+					else {
+						preparedStatement = connection
+								.prepareStatement(QueryUtil.selectallDoctor());
+					}
+					ResultSet resultSet = preparedStatement.executeQuery();
+
+					while (resultSet.next()) {
+						Doctor doctor = new Doctor();
+						doctor.setDoctorRegID(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+						doctor.setName(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+						doctor.setSpecialized(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
+						doctor.setGender(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
+						doctor.setHospital(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
+						doctor.setGender(resultSet.getString(CommonConstants.COLUMN_INDEX_SIX));
+						doctor.setContactNo(resultSet.getString(CommonConstants.COLUMN_INDEX_SEVEN));
+						doctor.setEmail(resultSet.getString(CommonConstants.COLUMN_INDEX_EIGHT));
+						doctor.setPassword(resultSet.getString(CommonConstants.COLUMN_INDEX_NINIE));
+						doctorList.add(doctor);
+					}
+				}catch (SQLException | ClassNotFoundException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				} finally {
+					/*
+					 * Close prepared statement and database connectivity at the end of
+					 * transaction
+					 */
+					try {
+						if (preparedStatement != null) {
+							preparedStatement.close();
+						}
+						if (connection != null) {
+							connection.close();
+						}
+					} catch (SQLException e) {
+						log.log(Level.SEVERE, e.getMessage());
+					}
+				}
+				return doctorList;
+			}
+			
+			
+			@Override
+			public ArrayList<Doctor> getDoctorcategory() {
+				
+				return actionOnDoctorcategory();
+			}
+			
+			
+			private ArrayList<Doctor> actionOnDoctorcategory() {
+				
+				ArrayList<Doctor> doctorCatList = new ArrayList<Doctor>();
+				try {
+					connection = DBConnectionUtil.getDBConnection();
+				
+						preparedStatement = connection
+								.prepareStatement(QueryUtil.selectcategory());
+				
+					ResultSet resultSet = preparedStatement.executeQuery();
+
+					while (resultSet.next()) {
+						Doctor doctor = new Doctor();
+						doctor.setSpecialized(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+						doctorCatList.add(doctor);
+					}
+
+				} catch (SQLException | ClassNotFoundException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				} finally {
+					/*
+					 * Close prepared statement and database connectivity at the end of
+					 * transaction
+					 */
+					try {
+						if (preparedStatement != null) {
+							preparedStatement.close();
+						}
+						if (connection != null) {
+							connection.close();
+						}
+					} catch (SQLException e) {
+						log.log(Level.SEVERE, e.getMessage());
+					}
+				}
+				return doctorCatList;
+			}
+			
+			@Override
+			public ArrayList<Doctor> getDoctorHospital() {
+				
+				return actionOnDoctorHospital();
+			}
+			
+			
+			private ArrayList<Doctor> actionOnDoctorHospital() {
+				
+				ArrayList<Doctor> doctorHostList = new ArrayList<Doctor>();
+				try {
+					connection = DBConnectionUtil.getDBConnection();
+				
+						preparedStatement = connection
+								.prepareStatement(QueryUtil.selectHospital());
+				
+					ResultSet resultSet = preparedStatement.executeQuery();
+
+					while (resultSet.next()) {
+						Doctor doctor = new Doctor();
+						doctor.setHospital(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+						doctorHostList.add(doctor);
+					}
+
+				} catch (SQLException | ClassNotFoundException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				} finally {
+					/*
+					 * Close prepared statement and database connectivity at the end of
+					 * transaction
+					 */
+					try {
+						if (preparedStatement != null) {
+							preparedStatement.close();
+						}
+						if (connection != null) {
+							connection.close();
+						}
+					} catch (SQLException e) {
+						log.log(Level.SEVERE, e.getMessage());
+					}
+				}
+				return doctorHostList;
+			}
+
+			@Override
+			public ArrayList<Doctor> getDoctorListForBooking(String category,String hospital) {
+				
+				return actionOnDoctorListForBooking(category,hospital);
+			}
+			
+			
+			private ArrayList<Doctor> actionOnDoctorListForBooking(String category,String hospital ) {
+				
+				ArrayList<Doctor> doctorListForBooking = new ArrayList<Doctor>();
+				try {
+					connection = DBConnectionUtil.getDBConnection();
+					preparedStatement = connection
+							.prepareStatement(QueryUtil.selectDoctorForBooking());
+					preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, category);
+					preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, hospital);
+				
+					ResultSet resultSet = preparedStatement.executeQuery();
+
+					while (resultSet.next()) {
+						Doctor doctor = new Doctor();
+						doctor.setDoctorRegID(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+						doctor.setName(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+						
+						doctorListForBooking.add(doctor);
+					}
+
+				} catch (SQLException | ClassNotFoundException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				} finally {
+					/*
+					 * Close prepared statement and database connectivity at the end of
+					 * transaction
+					 */
+					try {
+						if (preparedStatement != null) {
+							preparedStatement.close();
+						}
+						if (connection != null) {
+							connection.close();
+						}
+					} catch (SQLException e) {
+						log.log(Level.SEVERE, e.getMessage());
+					}
+				}
+				return doctorListForBooking;
+			}
 
 		
 

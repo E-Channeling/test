@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +46,7 @@
                                  <li><a href="bookingRequest.jsp">Booking Request</a></li>
                                  <li><a href="listpatientFeedback.jsp">patient Feedback</a></li>
                                 <li><a href="doctorProfile.jsp">Profile</a></li>
-                               <li><a href="index.jsp">Log Out</a></li>
+                               <li><a href="LoginDoctorServlet">Log Out</a></li>
                                 
                                 
                                 
@@ -74,7 +75,7 @@
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                     <header class="entry-header">
-                                     <h1>Doctor Portal<br></h1>
+                                     <h1>Doctor Portal <br></h1>
                                     </header><!-- .entry-header -->
                                         
                                 </div><!-- .col -->

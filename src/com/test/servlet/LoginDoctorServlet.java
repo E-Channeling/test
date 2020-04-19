@@ -33,8 +33,9 @@ public class LoginDoctorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		  	HttpSession session = request.getSession();
+		    session.removeAttribute("email");
+		    response.sendRedirect("index.jsp");
 	}
 
 	/**
@@ -51,15 +52,15 @@ public class LoginDoctorServlet extends HttpServlet {
 
         if (DoctorServiceImpl.login(doctor)) {
         	System.out.println(response);
-		    //HttpSession session = request.getSession();
-		    // session.setAttribute("username",username);
+		    HttpSession session = request.getSession();
+		     session.setAttribute("email",email);
         	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorDashbord.jsp");
     		dispatcher.forward(request, response);
     		
 		} else {
 		    HttpSession session = request.getSession();
-		    //session.setAttribute("user", username);
-		    //response.sendRedirect("login.jsp");
+		    session.setAttribute("email",email);
+		    response.sendRedirect("index.jsp");
 		}
 	}
 

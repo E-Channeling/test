@@ -51,8 +51,8 @@ public class LoginPatientServlet extends HttpServlet {
         patient.setPassword(password);
 
         if (PatientServiceImpl.login(patient)) {
-		    //HttpSession session = request.getSession();
-		    // session.setAttribute("username",username);
+		    HttpSession session = request.getSession();
+		     session.setAttribute("email",email);
         	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientDashbord.jsp");
     		dispatcher.forward(request, response);
 		} else {
