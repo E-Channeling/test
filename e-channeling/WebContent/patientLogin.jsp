@@ -85,13 +85,13 @@
 									        	}
 									        %>
 									        </label>
-									        <label for="inputEmail" class="sr-only">Email address</label>
-									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
+									        <label for="inputEmail" class="sr-only">User ID</label>
+									        <input type="text" id="inputEmail" class="form-control" placeholder="User ID" name="userID" required autofocus>
 									        <label for="inputPassword" class="sr-only">Password</label>
 									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name= "password" required>
 									        <div class="checkbox mb-3">
 									        <label>
-									            <a id="fpwd" href="#" style="color: blue">forgot password</a>
+									            <a id="fpwd" href="" style="color: blue">forgot password</a>
 									        </label>
 									      </div>
 									      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></br>

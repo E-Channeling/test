@@ -1,9 +1,13 @@
 package com.oop.service;
 
 
+import java.io.File;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import com.oop.model.Hospital;
 import com.oop.model.Patient;
 
 public interface PatientService {
@@ -16,7 +20,7 @@ public interface PatientService {
 	 * Add patient for patient table
 	 * @param patient
 	 */
-	public void addPatient(Patient patient);
+	public void addPatient(Patient patient, InputStream inputStream);
 
 	/**
 	 * Get a particular Patient
@@ -24,7 +28,7 @@ public interface PatientService {
 	 * @param patientID
 	 * @return Patient
 	 */
-	public Patient getPatientByID(String patientID);
+	public ArrayList<Patient> getPatientByID(String patientID);
 	
 	/**
 	 * Get all list of patient
@@ -40,21 +44,16 @@ public interface PatientService {
 	 * 
 	 * @return
 	 */
-	public Patient updatePatient(String employeeID, Patient employee);
+	public void updatePatient(Long id, Patient patient);
 
-	/**
-	 * Remove existing patient
-	 * 
-	 * @param patientID
-	 */
+
 	public void removePatient(String patientID);
 	
-	/**
-	 * Remove existing patient
-	 * 
-	 * @param email
-	 * @param password
-	 * 
-	 */
-	public boolean loginValidate(String email, String password);
+
+	public boolean loginValidate(String userID, String password);
+	
+	public ArrayList<Patient> findByUserId(String userId);
+	
+	public ArrayList<Patient> curentDayAppointmentPatient(Long doctorId);
+	
 }

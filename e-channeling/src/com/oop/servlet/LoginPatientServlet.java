@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oop.model.Patient;
 import com.oop.service.PatientService;
-import com.oop.serviceImpl.PatientServiceImpl;
+import com.oop.service.Impl.PatientServiceImpl;
 
 /**
  * Servlet implementation class LoginPatientServlet
@@ -46,17 +48,23 @@ public class LoginPatientServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		String email = request.getParameter("email");
+		String userID = request.getParameter("userID");
 		String password = getMd5(request.getParameter("password"));
 		String err = "Incorect email or password";
 		
-		
 		PatientService patientService = new PatientServiceImpl();
 		
-		if(patientService.loginValidate(email, password)) {
+		
+		
+		if(patientService.loginValidate(userID, password)) {
+			ArrayList<Patient> patientList = new ArrayList<Patient>();
+			PatientService patientSer = new PatientServiceImpl();
+			patientList = patientSer.findByUserId(request.getParameter("userID"));
+			
 			HttpSession session = request.getSession();
-			session.setAttribute("email", email);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientHome.jsp");
+			session.setAttribute("email", userID);
+			session.setAttribute("id", patientList.get(0).getId());
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientDashbord.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {

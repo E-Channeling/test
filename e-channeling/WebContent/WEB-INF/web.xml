@@ -10,6 +10,64 @@
     <servlet-name>LoginPatientServlet</servlet-name>
     <servlet-class>com.oop.servlet.LoginPatientServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CheckAvailableServlet</servlet-name>
+    <servlet-class>com.oop.servlet.CheckAvailableServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>BookServlet</servlet-name>
+    <servlet-class>com.oop.servlet.BookServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CancelBookServlet</servlet-name>
+    <servlet-class>com.oop.servlet.CancelBookServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>SearchDoctorServlet</servlet-name>
+    <servlet-class>com.oop.servlet.SearchDoctorServlet</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>AddFeedbackServlet</servlet-name>
+    <servlet-class>com.oop.servlet.AddFeedbackServlet</servlet-class>
+  </servlet>  
+   <servlet>
+    <servlet-name>AddDoctorServlet</servlet-name>
+    <servlet-class>com.oop.servlet.AddDoctorServlet</servlet-class>
+  </servlet>  
+   <servlet>
+    <servlet-name>LoginDoctorServlet</servlet-name>
+    <servlet-class>com.oop.servlet.LoginDoctorServlet</servlet-class>
+  </servlet>   
+   <servlet>
+    <servlet-name>AddScheduleServlet</servlet-name>
+    <servlet-class>com.oop.servlet.AddScheduleServlet</servlet-class>
+  </servlet>   
+   <servlet>
+    <servlet-name>LogoutServlat</servlet-name>
+    <servlet-class>com.oop.servlet.LogoutServlat</servlet-class>
+  </servlet> 
+   <servlet>
+   	<servlet-name>ApproveRejectServlet</servlet-name>
+    <servlet-class>com.oop.servlet.ApproveRejectServlet</servlet-class>
+  </servlet> 
+   <servlet>
+   	<servlet-name>UpdateScheduleServlet</servlet-name>
+    <servlet-class>com.oop.servlet.UpdateScheduleServlet</servlet-class>
+  </servlet> 
+   <servlet>
+   	<servlet-name>UpdateScheduleDetailServlet</servlet-name>
+    <servlet-class>com.oop.servlet.UpdateScheduleDetailServlet</servlet-class> 
+  </servlet> 
+   <servlet>
+   	<servlet-name>AddTreatmentServlet</servlet-name>
+    <servlet-class>com.oop.servlet.AddTreatmentServlet</servlet-class> 
+  </servlet> 
+   <servlet>
+   	<servlet-name>UpdatePatientServlet</servlet-name>
+    <servlet-class>com.oop.servlet.UpdatePatientServlet</servlet-class> 
+  </servlet> 
+
+  
  
   <servlet-mapping>
     <servlet-name>AddPatientServlet</servlet-name>
@@ -19,6 +77,63 @@
     <servlet-name>LoginPatientServlet</servlet-name>
     <url-pattern>/LoginPatientServlet</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+   <servlet-name>CheckAvailableServlet</servlet-name>
+    <url-pattern>/CheckAvailableServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>BookServlet</servlet-name>
+    <url-pattern>/BookServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>CancelBookServlet</servlet-name>
+    <url-pattern>/CancelBookServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>SearchDoctorServlet</servlet-name>
+    <url-pattern>/SearchDoctorServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>AddFeedbackServlet</servlet-name>
+    <url-pattern>/AddFeedbackServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>AddDoctorServlet</servlet-name>
+    <url-pattern>/AddDoctorServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>LoginDoctorServlet</servlet-name>
+    <url-pattern>/LoginDoctorServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>AddScheduleServlet</servlet-name>
+    <url-pattern>/AddScheduleServlet</url-pattern>
+  </servlet-mapping>  
+   <servlet-mapping>
+   <servlet-name>LogoutServlat</servlet-name>
+    <url-pattern>/LogoutServlat</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>ApproveRejectServlet</servlet-name>
+    <url-pattern>/ApproveRejectServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>UpdateScheduleServlet</servlet-name>
+    <url-pattern>/UpdateScheduleServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>UpdateScheduleDetailServlet</servlet-name>
+    <url-pattern>/UpdateScheduleDetailServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>AddTreatmentServlet</servlet-name>
+    <url-pattern>/AddTreatmentServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>UpdatePatientServlet</servlet-name>
+    <url-pattern>/UpdatePatientServlet</url-pattern>
+  </servlet-mapping> 
+
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

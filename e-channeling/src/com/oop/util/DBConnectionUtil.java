@@ -32,7 +32,7 @@ public class DBConnectionUtil extends CommonUtil {
 		if (connection == null || connection.isClosed()) {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test","root", "");
+			connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/e_channeling","root", "");
 		}
 		return connection;
 	}

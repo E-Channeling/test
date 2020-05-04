@@ -6,16 +6,16 @@
 	<query id="create_patient_table">
         <![CDATA[
             CREATE TABLE patient(
-            	id bigint not null AUTO_INCREMENT,
-				fName varchar(70) not null,
-				lName varchar(70) not null,
-				DOB date not null,
-				gender varchar(10) DEFAULT 'Male',
-				phoneNo char(10),
-				address varchar(255),
-				email varchar(30) not null,
-				password varchar(50) not null,
-				primary key (id)
+            	id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			    first_name varchar(30),
+			    last_name varchar(50),
+			    dob date,
+			    address varchar(255),
+			    contact varchar(12),
+			    gender varchar(10),
+			    email varchar(100) NOT NULL,
+			    user_id varchar(8) NOT NULL,
+			    password varchar(100) NOT NULL
 			)
         ]]>
 	</query>
@@ -30,52 +30,303 @@
 	<!-- insert patient Query -->
 	<query id="insert_patient">
         <![CDATA[
-          	insert into patient (fName, lName, DOB, gender, phoneNo, address, email, password) 
-          	values (?, ?, ?, ?, ?, ?, ?, ?)
+          	insert into patient (first_name, last_name, dob, address, contact, gender, email, photo, user_id, password) 
+          	values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ]]>
 	</query>
 	
 	<!-- Select patient by email and password Query -->
-	<query id="employee_by_email_and_password">
+	<query id="patient_by_email_and_password">
          <![CDATA[        
-            select * from patient where patient.email = ? and  patient.password = ?
+            select * from patient where patient.user_id = ? and  patient.password = ?
+        ]]>
+	</query>
+	
+	<query id="get_all_specilitaion">
+         <![CDATA[        
+            select * from specilization
+        ]]>
+	</query>
+	
+	<query id="get_all_hospital">
+         <![CDATA[        
+            select * from hospital
+        ]]>
+	</query>
+	
+	<query id="get_all_doctor">
+         <![CDATA[        
+            select * from doctor
+        ]]>
+	</query>
+	
+	<query id="get_availability">
+         <![CDATA[        
+            select * from schedule where hospital_id = ? and doctor_id = ? and specilization_id = ? and date = ? and status = ?
+            and schedule.date > CURRENT_DATE()
+        ]]>
+	</query>
+	
+	<query id="get_other_availability">
+         <![CDATA[        
+            select * from schedule where hospital_id = ? and specilization_id = ? and date = ? and status = ?
+            and schedule.date > CURRENT_DATE()
         ]]>
 	</query>
 
-	<!-- Select a particular employee by id Query -->
-	<query id="employee_by_id">
+	<query id="get_doctor_by_id">
+         <![CDATA[        
+            select * from doctor where id = ?
+        ]]>
+	</query>
+	
+	<query id="get_hospital_by_id">
+         <![CDATA[        
+            select * from hospital where id = ?
+        ]]>
+	</query>
+	
+	<query id="get_specilization_by_id">
+         <![CDATA[        
+            select * from specilization where id = ?
+        ]]>
+	</query>
+
+	<query id="update_schedule_status">
+         <![CDATA[        
+            update schedule 
+            set status = ?
+            where id = ?
+        ]]>
+	</query>
+
+	<query id="get_patient_id_by_user_id">
+         <![CDATA[        
+            select * from patient where user_id = ? 
+        ]]>
+	</query>
+	
+	<query id="add_appointment">
+        <![CDATA[
+          	insert into appoiment (patient_id, schedule_id, appoiment_date, status ) 
+          	values (?, ?, ?, ?)
+        ]]>
+	</query>
+	
+	<query id="find_appointment_by_patientId">
+        <![CDATA[
+          	select * from appoiment where patient_id = ? 
+        ]]>
+	</query>
+	
+	<query id="find_schedule_by_id">
+        <![CDATA[
+          	select * from schedule where id = ? 
+        ]]>
+	</query>
+	
+	<query id="find_appointment_status_booked_and_pending_by_patientId">
+        <![CDATA[
+          	select * from appoiment,schedule where patient_id = ? 
+          	and schedule_id = schedule.id
+          	and schedule.date > CURRENT_DATE()
+          	and appoiment.status in ('APPROVE', 'PENDING');
+        ]]>
+	</query>
+	
+	<query id="get_doctor_by_name">
+         <![CDATA[        
+            select * from doctor where first_name like ? or last_name like ?
+        ]]>
+	</query>
+	
+	<query id="update_cancel_details">
+         <![CDATA[        
+            update appoiment set status = ? , cancel_date = ?
+            where patient_id = ? 
+            and schedule_id = ?
+        ]]>
+	</query>
+
+	<query id="get_doctor_specilization_by_doctor_id">
+         <![CDATA[        
+			select * from doctor_speclization where doctor_id = ?
+        ]]>
+	</query>
+	
+	<query id="insert_feedback">
+        <![CDATA[
+          	insert into feedback (patient_id, doctor_id, description, date) 
+          	values (?, ?, ?, ?)
+        ]]>
+	</query>
+
+	<query id="create_doctor">
+        <![CDATA[
+          	insert into doctor (first_name, last_name, address, contact, gender, email, hospital_id, user_id, password) 
+          	values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ]]>
+	</query>
+
+	<query id="get_doctor_by_user_id">
+         <![CDATA[        
+            select * from doctor where user_id = ? 
+        ]]>
+	</query>
+
+	<query id="doctor_login_validate">
+         <![CDATA[        
+            select * from doctor where doctor.user_id = ? and  doctor.password = ?
+        ]]>
+	</query>
+	
+	<query id="add_schedule">
+        <![CDATA[
+          	insert into schedule (hospital_id, doctor_id, specilization_id, from_time, to_time, date, status) 
+          	values (?, ?, ?, ?, ?, ?, ?)
+        ]]>
+	</query>
+	
+	<query id="approve_or_reject_appointment">
+        <![CDATA[
+          	select * from schedule, appoiment
+          	where doctor_id = ?
+          	and schedule.id = appoiment.schedule_id
+          	and appoiment.status = 'PENDING'
+          	and schedule.date >= CURRENT_DATE()
+        ]]>
+	</query>
+
+	<query id="get_appointment_by_schedule_id">
+        <![CDATA[
+          	select * from appoiment
+          	where schedule_id = ?
+          	and appoiment.status = 'PENDING'
+        ]]>
+	</query>
+
+	<query id="patient_ids">
          <![CDATA[        
             select * from patient where patient.id = ?
         ]]>
 	</query>
-
-	<!-- Select all employees -->
-	<query id="all_employees">
+	
+	<query id="update_appoiment_status">
          <![CDATA[        
-            select * from patient
-        ]]>
-	</query>
-
-	<!-- Delete a particular employee by id Query -->
-	<query id="remove_employee">
-         <![CDATA[        
-            delete from patient where patient.id = ?
+            update appoiment set status = ?
+            where id = ?
         ]]>
 	</query>
 	
-	<!-- Update a particular employee by id Query >
-	< query id="update_employee">
+	
+	<query id="get_feedback_by_doctor_id">
          <![CDATA[        
-            update employee as e 
-            set e.employeeName = ?, e.designation = ?, e.faculty = ?, e.department = ?, e.address = ?, e.qualifications = ?, e.gender = ? 
-            where e.employeeID = ?
+            select * from feedback where doctor_id = ?
         ]]>
 	</query>
 	
-	<query id="employee_ids">
+	
+	<query id="get_all_avilable_schedule">
          <![CDATA[        
-            select e.employeeID from employee as e
+            select * from schedule where status = 'AVAILABLE'
+            and doctor_id = ?
+            and date >= CURRENT_DATE()
         ]]>
-	</query-->
+	</query>
+	
+	<query id="remove_schedule">
+         <![CDATA[        
+            delete from schedule where id = ?
+        ]]>
+	</query>
+	
+	
+	<query id="update_schedule">
+         <![CDATA[        
+            update schedule set hospital_id = ? ,
+            specilization_id = ?,
+            date = ?,
+            from_time = ? ,
+            to_time = ?
+            where id = ?
+        ]]>
+	</query>
+	
+	<query id="all_appointment_relevent_doctor">
+        <![CDATA[
+          	select * from schedule, appoiment
+          	where doctor_id = ?
+          	and schedule.id = appoiment.schedule_id
+        ]]>
+	</query>
+	
+	<query id="get_all_appointment_by_schedule_id">
+        <![CDATA[
+          	select * from appoiment
+          	where schedule_id = ?
+        ]]>
+	</query>
+	
+	<query id="insert_treatment">
+        <![CDATA[
+          	insert into treatment (patient_id, doctor_id, description, date) 
+          	values (?, ?, ?, ?)
+        ]]>
+	</query>
+
+	<query id="get_current_day_appintment_patient">
+        <![CDATA[
+          	select patient.id, patient.first_name, patient.last_name 
+          	from schedule, appoiment, patient
+          	where schedule.id = appoiment.schedule_id
+          	and appoiment.status = 'APPROVE'
+          	and appoiment.patient_id = patient.id
+          	and schedule.date = CURRENT_DATE()
+          	and schedule.doctor_id = ?
+          	
+        ]]>
+	</query>
+	
+	<query id="get_current_day_schedule_by_doctor">
+        <![CDATA[
+          	select *
+          	from schedule
+          	where schedule.date = CURRENT_DATE()
+          	and doctor_id = ?
+          	
+        ]]>
+	</query>
+	
+	<query id="update_appoiment_status_by_schedule_id">
+         <![CDATA[        
+            update appoiment set status = ?
+            where schedule_id = ?
+        ]]>
+	</query>
+
+	<query id="get_patient_profile_pic_by_id">
+         <![CDATA[        
+            select * from patient 
+            where id = ?
+        ]]>
+	</query>
+
+	<query id="update_patient">
+         <![CDATA[        
+            update patient set first_name = ?,
+            last_name = ?,
+            contact = ?,
+            address = ?,
+            email = ?
+            where id = ?
+        ]]>
+	</query>
+
+
+
+
+
+
+
 
 </Querys>

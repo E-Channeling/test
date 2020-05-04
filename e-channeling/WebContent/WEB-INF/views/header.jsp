@@ -3,7 +3,7 @@
 		response.setHeader("Cache-Controle", "no-cache, no-store, must-revalidate");
 		response.setHeader("Pragma", "no-cache"); //HTTP 1.0
 		response.setHeader("Expires", "0"); //Proxiy
-	
+		session.getAttribute("id");
        		if(session.getAttribute("email") == null)
     	   		response.sendRedirect("patientLogin.jsp");
     %>
@@ -22,20 +22,23 @@
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">View Booking</a>
+            <a class="nav-link" href="viewBooking.jsp">View Booking</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Cancel Book</a>
+            <a class="nav-link" href="cancelBook.jsp">Cancel Book</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Search Doctor</a>
+            <a class="nav-link" href="searchDoctor.jsp">Search Doctor</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="feedback.jsp">FeedBack</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="index.jsp">Logout</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto nav-flex-icons">
-        	<li class="nav-item">${email}</li>
+        	<li class="nav-item" style="color: white">Welcome ${email}</li><pre>  </pre>
             <li class="nav-item avatar">
             <a class="nav-link p-0" href="#">
                 <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"

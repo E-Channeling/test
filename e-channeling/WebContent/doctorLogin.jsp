@@ -75,20 +75,26 @@
 											Doctor Login
 										</h1>
 									</header>
-										<form  class="form-signin" target="_self" action=""> 
-									        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-									        
-									        <label for="inputEmail" class="sr-only">Email address</label>
-									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-									        <label for="inputPassword" class="sr-only">Password</label></br>
-									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+										<form method="post"  class="form-signin" target="_self" action="LoginDoctorServlet" style="border-radius: 10px; padding: 30px;background-color: white;box-shadow: 2px 2px 2px 2px rgb(194, 194, 194);width: 100%"> 
+									        <center><i class="fa fa-user-circle" style="font-size:66px;color:blue"></i></center></br>
+									        <label style="color:red">
+									        <% 
+									        	if(request.getAttribute("error") != null) {
+									            	out.println(request.getAttribute("error"));
+									        	}
+									        %>
+									        </label>
+									        <label for="inputEmail" class="sr-only">User ID</label>
+									        <input type="text" id="inputEmail" class="form-control" placeholder="User ID" name="userID" required autofocus>
+									        <label for="inputPassword" class="sr-only">Password</label>
+									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name= "password" required>
 									        <div class="checkbox mb-3">
 									        <label>
-									            <a id="fpwd" href="#">forget password</a>
+									            <a id="fpwd" href="" style="color: blue">forgot password</a>
 									        </label>
 									      </div>
 									      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></br>
-									      <a id="fpwd" href="#">Register</a>
+									      <a id="fpwd" href="doctorRegister.jsp">New Doctor Register</a>
 									    </form>
 									    
 									<div class="text-center"></div>

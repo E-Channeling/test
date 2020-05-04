@@ -1,26 +1,31 @@
 package com.oop.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.oop.model.Patient;
 import com.oop.service.PatientService;
-import com.oop.serviceImpl.PatientServiceImpl;
+import com.oop.service.Impl.PatientServiceImpl;
 
 
 
 /**
  * Servlet implementation class AddPatient
  */
+@MultipartConfig(maxFileSize = 10177215)
 @WebServlet("/AddPatient")
 public class AddPatientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -47,25 +52,50 @@ public class AddPatientServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		
 		Patient patient = new Patient();
-		
-		patient.setfName(request.getParameter("fName"));
-		patient.setlName(request.getParameter("lName"));
-		patient.setDOB(request.getParameter("DOB"));
-		patient.setPhoneNo(request.getParameter("phoneNo"));
-		patient.setAddress(request.getParameter("address"));
-		patient.setGender(request.getParameter("gender"));
-		patient.setEmail(request.getParameter("email"));
-		patient.setPassword(getMd5(request.getParameter("password")));
-		
+		ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
 		PatientService patientService = new PatientServiceImpl();
-		patientService.addPatient(patient);
-
-		request.setAttribute("patient", patient);
+		patientArrayList = patientService.findByUserId(request.getParameter("userID"));
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientLogin.jsp");///WEB-INF/views/
-		dispatcher.forward(request, response);
+		if(patientArrayList.isEmpty()) {
+		
+			patient.setFirstName(request.getParameter("fName"));
+			patient.setLastName(request.getParameter("lName"));
+			patient.setDob(request.getParameter("DOB"));
+			patient.setContact(request.getParameter("phoneNo"));
+			patient.setAddress(request.getParameter("address"));
+			patient.setGender(request.getParameter("gender"));
+			patient.setEmail(request.getParameter("email"));
+			patient.setUser_id(request.getParameter("userID"));
+			patient.setPassword(getMd5(request.getParameter("password")));
+			
+			 
+	        InputStream inputStream = null;
+			Part filePart = request.getPart("photo");
+	        if (filePart != null) {
+	            // prints out some information for debugging
+	            System.out.println(filePart.getName());
+	            System.out.println(filePart.getSize());
+	            System.out.println(filePart.getContentType());
+	             
+	            // obtains input stream of the upload file
+	            inputStream = filePart.getInputStream();
+	        }
+			
+		
+			patientService.addPatient(patient, inputStream);
+
+			request.setAttribute("patient", patient);
+		
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientLogin.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			String msg = "User ID alredy exist";
+			request.setAttribute("msg", msg);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/patientRegister.jsp");
+			dispatcher.forward(request, response);
+		}
 		
 	}
 	

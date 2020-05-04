@@ -55,35 +55,54 @@
 					</div>
 					<!-- .col -->
 				</div>
-				<form method="post" class="form-signup" target="_self"
-					action="AddPatientServlet"
+				<form method="post" target="_self"
+					action="AddPatientServlet" enctype="multipart/form-data"
 					style="border-radius: 10px; padding: 30px; background-color: white; box-shadow: 2px 2px 2px 2px rgb(194, 194, 194); width: 50%; margin: 20px;">
 					<h1>Patient Register</h1>
-					<label>First Name</label> <input type="text" class="form-control"
+					<%if(request.getAttribute("msg") != null) { %>
+					<h4 style="color: red;">${msg}</h4>
+					<%} %>
+					<div class="form-group">
+					<label>First Name</label> 
+					<input type="text" class="form-control"
 						placeholder="First Name" required autofocus name="fName">
-					<label>Last Name</label> <input type="text" class="form-control"
-						placeholder="Last Name" required autofocus name="lName"> <label>Date
-						of Birth</label> <input type="date" class="form-control" placeholder="DOB"
-						required autofocus name="DOB"> <label>Gender</label> <input
-						type="text" class="form-control" placeholder="Gender" required
-						autofocus name="gender"> <label>Phone Number</label> <input
-						type="number" class="form-control" placeholder="Phone Number"
-						required autofocus name="phoneNo"> <label>Address</label>
+					<label>Last Name</label> 
+					<input type="text" class="form-control"
+						placeholder="Last Name" required autofocus name="lName"> 
+					<label>Date of Birth</label> 
+					<input type="date" class="form-control" placeholder="DOB"
+						required autofocus name="DOB"> 
+					<label>Gender</label> 
+					<select name="gender" class="form-control">
+					    <option value="MALE" selected="selected">MALE</option>
+					    <option value="FEMALE" >FEMALE</option>
+					</select>
+					<label>Phone Number</label> 
+					<input type="number" class="form-control" placeholder="Phone Number"
+						required autofocus name="phoneNo"> 
+					<label>Address</label>
 					<input type="text" class="form-control" placeholder="Address"
-						required autofocus name="address"> <label>Email
-						address</label> <input type="email" class="form-control"
-						placeholder="Email address" required autofocus name="email">
-					<label for="inputPassword">Password</label> <input type="password"
-						class="form-control" placeholder="Password" required
-						name="password">
-					<div class="checkbox mb-3">
-						<label> <a id="fpwd" href="#" style="color: red">forgot
-								password</a>
-						</label>
+						required autofocus name="address"> 
+					<label>Email address</label> 
+					<input type="email" class="form-control"
+						placeholder="Email address" required autofocus name="email"> </br>
+					<div class="custom-file">
+					    <input type="file" class="custom-file-input" id="validatedCustomFile" required="required" name="photo">
+					    <label class="custom-file-label" for="validatedCustomFile">Choose photo...</label>
+					    <div class="invalid-feedback">Example invalid custom file feedback</div>
 					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+					<label>User ID</label> 
+					<input type="text" class="form-control"
+						placeholder="userID" required autofocus name="userID"> 
+					<label for="inputPassword">Password</label> 
+					<input type="password" class="form-control" placeholder="Password" required
+						name="password" id="txtPassword">
+					<label for="inputPassword">Confirm Password</label> 
+					<input type="password"class="form-control" placeholder="Password" required name="cPassword" id="txtConfirmPassword"></br>
+					<button class="btn btn-lg btn-primary btn-block" type="submit" id="btnSubmit">Sign
 						in</button>
 					</br> <a id="fpwd" href="patientLogin.jsp">Login</a>
+					</div>
 				</form>
 			</div>
 			<!-- .container -->
@@ -118,7 +137,20 @@
 			</div>
 	</header>
 	<!-- .site-header -->
-
+	<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            var password = $("#txtPassword").val();
+            var confirmPassword = $("#txtConfirmPassword").val();
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        });
+    });
+</script>
+	
 
 
 
