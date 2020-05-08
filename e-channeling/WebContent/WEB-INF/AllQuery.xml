@@ -321,6 +321,12 @@
             where id = ?
         ]]>
 	</query>
+	
+	<query id="get_all_patient">
+         <![CDATA[        
+            select * from patient
+        ]]>
+	</query>	
 
 
 

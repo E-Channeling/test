@@ -56,4 +56,5 @@ public interface PatientService {
 	
 	public ArrayList<Patient> curentDayAppointmentPatient(Long doctorId);
 	
+	
 }

@@ -154,8 +154,51 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public ArrayList<Patient> getPatient() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Patient> patientList = new ArrayList<Patient>();
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection
+						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUARY_ALL_PATIENT));
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					Patient patient = new Patient();
+					
+					patient.setId(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+					patient.setFirstName(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+					patient.setLastName(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
+					patient.setDob(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
+					patient.setAddress(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
+					patient.setContact(resultSet.getString(CommonConstants.COLUMN_INDEX_SIX));
+					patient.setGender(resultSet.getString(CommonConstants.COLUMN_INDEX_SEVEN));
+					patient.setEmail(resultSet.getString(CommonConstants.COLUMN_INDEX_EIGHT));
+					patient.setUser_id(resultSet.getString(CommonConstants.COLUMN_INDEX_NINIE));
+					patient.setPassword(resultSet.getString(CommonConstants.COLUMN_INDEX_TEN));
+					patientList.add(patient);
+				}
+
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		return patientList;
 	}
 
 	@Override

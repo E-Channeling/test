@@ -131,6 +131,8 @@ public class CommonConstants {
 	
 	public static final String QUERY_FIND_PATIENT_PROFILE_PICTURE = "get_patient_profile_pic_by_id";
 	
+	public static final String QUARY_ALL_PATIENT = "get_all_patient";
+	
 	
 	/** Constant for Column index one */
 	public static final int COLUMN_INDEX_ONE = 1;
