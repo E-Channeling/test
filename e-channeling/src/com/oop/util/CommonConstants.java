@@ -53,9 +53,15 @@ public class CommonConstants {
 
 	/** Constant for query id of update a patient in patientQuery.xml */
 	public static final String QUERY_ID_UPDATE_PATIENT = "update_patient";
+	
+	/** Constant for query id of update a doctor in patientQuery.xml */
+	public static final String QUERY_ID_UPDATE_DOCTOR = "update_doctor";
 
 	/** Constant for query id of get all patient ids in patientQuery.xml */
 	public static final String QUERY_ID_GET_PATIENT_IDS = "patient_ids";
+	
+	/** Constant for query id of get all doctor ids in patientQuery.xml */
+	public static final String QUERY_ID_GET_Doctor_IDS = "doctor_ids";
 	
 	public static final String QUEARY_VALIDATE_LOGIN = "patient_by_email_and_password";
 	

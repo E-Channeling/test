@@ -41,7 +41,8 @@
     </div>
           <div class="img bg-wrap text-center py-4" style="background-image: url(images/bg_1.jpg);">
               <div class="user-logo">
-                  <div class="img" style="background-image: url(images/logo.jpg);"></div>
+              <a href ="updateDoctor.jsp">
+                  <div class="img" style="background-image: url(images/logo.jpg);"></div></a>
                   <h3>${email}</h3>
               </div>
           </div>
@@ -66,7 +67,7 @@
         <a href="viewAllAppointment.jsp"><span class="fa fa-cog mr-3"></span>View All Appointment</a>
       </li>
       <li>
-        <a href=""><span class="fa fa-support mr-3"></span>View Patient Details</a>
+        <a href="viewPatientDetails.jsp"><span class="fa fa-support mr-3"></span>View Patient Details</a>
       </li>
       <li>
         <a href="viewFeedback.jsp"><span class="fa fa-support mr-3"></span>View FeedBack</a>

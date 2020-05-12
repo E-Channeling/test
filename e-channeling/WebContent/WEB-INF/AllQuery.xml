@@ -329,8 +329,21 @@
 	</query>	
 
 
-
-
+	<query id="doctor_ids">
+         <![CDATA[        
+            select * from doctor where doctor.id = ?
+        ]]>
+	</query>
+	<query id="update_doctor">
+         <![CDATA[        
+            update doctor set first_name = ?,
+            last_name = ?,
+            contact = ?,
+            address = ?,
+            email = ?
+            where id = ?
+        ]]>
+	</query>
 
 
 
