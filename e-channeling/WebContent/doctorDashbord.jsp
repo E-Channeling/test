@@ -30,7 +30,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Sidebar 09</title>
+  	<title>Doctor Portal</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -40,7 +40,7 @@
 		<link rel="stylesheet" href="css/style.css">	
   </head>
   <body style="background-image: url(images/hero.jpg);">
-    <jsp:include page="/WEB-INF/views/header1.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/header2.jsp"></jsp:include>
 	<%
 		int patientCount = 0;
 		int doctorCount = 0;
