@@ -66,9 +66,7 @@
       <li>
         <a href="viewAllAppointment.jsp"><span class="fa fa-cog mr-3"></span>View All Appointment</a>
       </li>
-      <li>
-        <a href="viewPatientDetails.jsp"><span class="fa fa-support mr-3"></span>View Patient Details</a>
-      </li>
+
       <li>
         <a href="viewFeedback.jsp"><span class="fa fa-support mr-3"></span>View FeedBack</a>
       </li>
