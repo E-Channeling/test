@@ -14,23 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oop.model.Admin;
 import com.oop.model.Doctor;
+import com.oop.service.AdminService;
 import com.oop.service.DoctorService;
-import com.oop.service.PatientService;
+import com.oop.service.Impl.AdminServiceImpl;
 import com.oop.service.Impl.DoctorServiceImpl;
-import com.oop.service.Impl.PatientServiceImpl;
 
 /**
- * Servlet implementation class LoginDoctorServlet
+ * Servlet implementation class LoginAdminrServlet
  */
-@WebServlet("/LoginDoctorServle")
-public class LoginDoctorServlet extends HttpServlet {
+@WebServlet("/LoginAdminrServle")
+public class LoginAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginDoctorServlet() {
+    public LoginAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,30 +48,32 @@ public class LoginDoctorServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		response.setContentType("text/html");
 		
 		String userID = request.getParameter("userID");
 		String password = getMd5(request.getParameter("password"));
 		String err = "Incorect email or password";
 		
-		DoctorService doctorService = new DoctorServiceImpl();
+		AdminService adminService = new AdminServiceImpl();
 		
 		
 		
-		if(doctorService.loginValidate(userID, password)) {
-			ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
-			DoctorService doctortSer = new DoctorServiceImpl();
-			doctorList = doctortSer.findByUserId(request.getParameter("userID"));
+		if(adminService.loginValidate(userID, password)) {
+			ArrayList<Admin> adminList = new ArrayList<Admin>();
+			
+			AdminService adminSer = new AdminServiceImpl();
+			adminList = adminSer.findByUserId(request.getParameter("userID"));
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("email", userID);
-			session.setAttribute("id", doctorList.get(0).getId());
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorDashbord.jsp");
+			session.setAttribute("id", adminList.get(0).getId());
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/adminDashbord.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {
 			request.setAttribute("error", err);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/doctorLogin.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/adminLogin.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

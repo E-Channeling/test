@@ -119,4 +119,115 @@ public class HospitalServiceImpl implements HospitalService {
 		return hospitalList;
 	}
 
+
+	@Override
+	public void addHospital(Hospital hospital) {
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+			/*
+			 * Query is available in EmployeeQuery.xml file and use
+			 * insert_employee key to extract value of it
+			 */
+			preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_INSERT_HOSPITAL));
+			connection.setAutoCommit(false);
+			
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, hospital.getName());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, hospital.getAddress());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, hospital.getContact());
+			preparedStatement.execute();
+			connection.commit();
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		
+	}
+
+
+	@Override
+	public void deleteHospital(Long Id) {
+		if (Id != null) {
+			
+			try {
+				connection = DBConnectionUtil.getDBConnection();
+				preparedStatement = connection
+						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUEARY_REMOVE_HOSPITAL));
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_ONE, Id);
+				preparedStatement.executeUpdate();
+				
+			} catch (SQLException | SAXException | IOException | ParserConfigurationException
+					| ClassNotFoundException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			} finally {
+				/*
+				 * Close prepared statement and database connectivity at the end
+				 * of transaction
+				 */
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+		}
+		
+	}
+
+
+	@Override
+	public void updateHospital(Long id, Hospital hospital) {
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUEARY_UPDATE_HOSPITAL));
+			
+				
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, hospital.getName());
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, hospital.getAddress());
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, hospital.getContact());
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_FOUR, id);
+				
+				preparedStatement.executeUpdate();
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException  e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		
+	}
+
 }

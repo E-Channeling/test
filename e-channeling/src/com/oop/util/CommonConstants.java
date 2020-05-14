@@ -133,6 +133,16 @@ public class CommonConstants {
 	
 	public static final String QUARY_ALL_PATIENT = "get_all_patient";
 	
+	public static final String QUEARY_ADMIN_LOGIN_VALIDATE = "admin_login_validate";
+	
+	public static final String QUEARY_ADMIN_BY_USER_ID = "get_admin_by_user_id";
+	
+	public static final String QUERY_INSERT_HOSPITAL = "add_hospital";
+
+	public static final String QUEARY_REMOVE_HOSPITAL = "remove_hospital";
+	
+	public static final String QUEARY_UPDATE_HOSPITAL = "update_hospital";
+	
 	
 	/** Constant for Column index one */
 	public static final int COLUMN_INDEX_ONE = 1;
@@ -166,4 +176,12 @@ public class CommonConstants {
 	public static final int COLUMN_INDEX_ELEVEN = 11;
 	
 	public static final int COLUMN_INDEX_TWELVE = 12;
+
+
+
+
+
+	
+
+	
 }

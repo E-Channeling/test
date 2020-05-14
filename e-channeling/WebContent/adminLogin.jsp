@@ -75,20 +75,24 @@
 											Admin Login
 										</h1>
 									</header>
-										<form  class="form-signin" target="_self" action=""> 
-									        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-									        
+										<form  class="form-signin" target="_self" action="LoginAdminServlet" method="post"> 
+									        <label style="color:red">
+									        <% 
+									        	if(request.getAttribute("error") != null) {
+									            	out.println(request.getAttribute("error"));
+									        	}
+									        %>
+									        </label>
 									        <label for="inputEmail" class="sr-only">Email address</label>
-									        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+									        <input type="text" id="inputEmail" class="form-control" placeholder="userId" required autofocus name="userID">
 									        <label for="inputPassword" class="sr-only">Password</label></br>
-									        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+									        <input type="password" id="inputPassword" class="form-control" placeholder="Password"  name= "password" required>
 									        <div class="checkbox mb-3">
 									        <label>
 									            <a id="fpwd" href="#">forget password</a>
 									        </label>
 									      </div>
 									      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button></br>
-									      <a id="fpwd" href="#">Register</a>
 									    </form>
 									    
 									<div class="text-center"></div>

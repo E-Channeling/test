@@ -66,7 +66,22 @@
    	<servlet-name>UpdatePatientServlet</servlet-name>
     <servlet-class>com.oop.servlet.UpdatePatientServlet</servlet-class> 
   </servlet> 
-
+   <servlet>
+   	<servlet-name>LoginAdminServlet</servlet-name>
+    <servlet-class>com.oop.servlet.LoginAdminServlet</servlet-class> 
+  </servlet> 
+   <servlet>
+   	<servlet-name>AddHospitalServlet</servlet-name>
+    <servlet-class>com.oop.servlet.AddHospitalServlet</servlet-class> 
+  </servlet> 
+   <servlet>
+   	<servlet-name>HospitalMangeServlet</servlet-name>
+    <servlet-class>com.oop.servlet.HospitalMangeServlet</servlet-class> 
+  </servlet> 
+   <servlet>
+   	<servlet-name>UpdateHospitalServlet</servlet-name>
+    <servlet-class>com.oop.servlet.UpdateHospitalServlet</servlet-class> 
+  </servlet> 
   
  
   <servlet-mapping>
@@ -133,7 +148,22 @@
    <servlet-name>UpdatePatientServlet</servlet-name>
     <url-pattern>/UpdatePatientServlet</url-pattern>
   </servlet-mapping> 
-
+   <servlet-mapping>
+   <servlet-name>LoginAdminServlet</servlet-name>
+    <url-pattern>/LoginAdminServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>AddHospitalServlet</servlet-name>
+    <url-pattern>/AddHospitalServlet</url-pattern>
+  </servlet-mapping> 
+   <servlet-mapping>
+   <servlet-name>HospitalMangeServlet</servlet-name>
+    <url-pattern>/HospitalMangeServlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+   <servlet-name>UpdateHospitalServlet</servlet-name>
+    <url-pattern>/UpdateHospitalServlet</url-pattern>
+  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

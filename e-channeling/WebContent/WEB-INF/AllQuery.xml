@@ -329,10 +329,39 @@
 	</query>	
 
 
+	<query id="admin_login_validate">
+         <![CDATA[        
+            select * from admin where user_id = ? and  password = ?
+        ]]>
+	</query>
+
+	<query id="get_admin_by_user_id">
+         <![CDATA[        
+            select * from admin where user_id = ? 
+        ]]>
+	</query>
+
+	<query id="add_hospital">
+        <![CDATA[
+          	insert into hospital (name, address, contact) 
+          	values (?, ?, ?)
+        ]]>
+	</query>
+
+	<query id="remove_hospital">
+         <![CDATA[        
+            delete from hospital where id = ?
+        ]]>
+	</query>
 
 
-
-
-
+	<query id="update_hospital">
+         <![CDATA[        
+            update hospital set name = ?,
+            address = ?,
+            contact = ?
+            where id = ?
+        ]]>
+	</query>
 
 </Querys>
