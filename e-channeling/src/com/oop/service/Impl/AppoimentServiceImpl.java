@@ -78,6 +78,95 @@ public class AppoimentServiceImpl implements AppoimentService {
 		}
 		
 	}
+	
+	@Override
+	public ArrayList<Appoiment> findAll() {
+		ArrayList<Appoiment> appointmentList = new ArrayList<Appoiment>();
+		
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUEARY_ALL_APPOINTMENT));
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Appoiment appointment = new Appoiment();
+				
+				appointment.setId(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+				appointment.setPatientId(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+				appointment.setScheduleId(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
+				appointment.setAppoimentDate(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
+				appointment.setStatus(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
+				appointment.setCancelDate(resultSet.getString(CommonConstants.COLUMN_INDEX_SIX));
+				appointmentList.add(appointment);
+			}
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		return appointmentList;
+	}
+	
+	@Override
+	public ArrayList<Appoiment> findById(Long id) {
+		ArrayList<Appoiment> appointmentList = new ArrayList<Appoiment>();
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+			preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_APPOINTMENT_BY_APPOINTMENT_ID));
+			preparedStatement.setLong(CommonConstants.COLUMN_INDEX_ONE, id);
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					Appoiment appointment = new Appoiment();
+					
+					appointment.setId(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+					appointment.setPatientId(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
+					appointment.setScheduleId(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
+					appointment.setAppoimentDate(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
+					appointment.setStatus(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
+					appointmentList.add(appointment);
+				}
+
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		return appointmentList;
+	
+	}
 
 	@Override
 	public ArrayList<Appoiment> findByPatientId(Long patientId) {
@@ -366,6 +455,66 @@ public class AppoimentServiceImpl implements AppoimentService {
 		
 	}
 	
+	@Override
+	public void deleteAppointment(Long id) {
+		if(id != null) {
+			try {
+				connection = DBConnectionUtil.getDBConnection();
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_REMOVE_APPOINTMENT));
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_ONE, id);
+				preparedStatement.executeUpdate();
+			} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			} finally {
+				/*
+				 * Close prepared statement and database connectivity at the end
+				 * of transaction
+				 */
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+		}
+	}
 	
+	@Override
+	public void updateAppointment(Long id, Appoiment appointment) {
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_UPDATE_APPOINTMENT));
+			
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, appointment.getAppoimentDate());
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, appointment.getStatus());
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_THREE, id);
+				
+				preparedStatement.executeUpdate();
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException  e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+	}
 
 }

@@ -71,6 +71,8 @@ public class CommonConstants {
 	
 	public static final String QUEARY_ALL_DOCTOR = "get_all_doctor";
 	
+	public static final String QUERY_GET_DOCTORS = "get_doctors";
+	
 	public static final String QUEARY_GET_AVALABILITY = "get_availability";
 	
 	public static final String QUEARY_GET_OTHER_AVALABILITY = "get_other_availability";
@@ -102,6 +104,8 @@ public class CommonConstants {
 	public static final String QUERY_INSERT_FEEDBACK = "insert_feedback"; 
 	
 	public static final String QUERY_ID_INSERT_DOCTOR = "create_doctor";
+	
+	public static final String QUERY_REMOVE_DOCTOR = "remove_doctor";
 	
 	public static final String QUEARY_DOCTOR_BY_USER_ID = "get_doctor_by_user_id";
 	
@@ -149,6 +153,19 @@ public class CommonConstants {
 	
 	public static final String QUEARY_UPDATE_HOSPITAL = "update_hospital";
 	
+	public static final String QUEARY_ALL_APPOINTMENT = "all_appointments";
+	
+	public static final String QUEARY_ADMIN_CHANGE_PASSWORD = "admin_change_password";
+	
+	public static final String QUEARY_ADMIN_BY_ID = "get_admin_user_id";
+	
+	public static final String QUERY_APPOINTMENT_BY_APPOINTMENT_ID = "get_appointment_by_appointment_id";
+	
+	public static final String QUERY_REMOVE_APPOINTMENT = "remove_appointment";
+	
+	public static final String QUERY_ID_UPDATE_APPOINTMENT = "update_appointment";
+	
+	public static final String QUERY_ID_INSERT_ADMIN = "add_admin";
 	
 	/** Constant for Column index one */
 	public static final int COLUMN_INDEX_ONE = 1;

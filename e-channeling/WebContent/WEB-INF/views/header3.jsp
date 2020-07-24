@@ -47,12 +47,33 @@
           </div>
     <ul class="list-unstyled components mb-5">
       <li class="active">
-        <a href="adminDashbord.jsp"><span class="fa fa-home mr-3">Dashbord</span> </a>
+        <a href="adminDashbord.jsp"><span class="fa fa-home mr-3">Dashboard</span> </a>
       </li>
 	  <li>
         <a href="addHospital.jsp"><span class="fa fa-home mr-3">Add Hospital</span> </a>
       </li>
-     <li>
-        <a href="viewAllHospital.jsp"><span class="fa fa-trophy mr-3">View All Hospital</span></a>
+      <li>
+        <a href="viewAllHospital.jsp"><span class="fa fa-trophy mr-3">View All Hospitals</span></a>
+      </li>
+      <li>
+        <a href="adminAddDoctor.jsp"><span class="fa fa-home mr-3">Add Doctor</span> </a>
+      </li>
+      <li>
+        <a href="viewAllDcotors.jsp"><span class="fa fa-trophy mr-3">View All Doctors</span></a>
+      </li>
+      <li>
+        <a href="adminAddPatient.jsp"><span class="fa fa-home mr-3">Add Patient</span> </a>
+      </li>
+      <li>
+        <a href="viewAllPatients.jsp"><span class="fa fa-trophy mr-3">View All Patients</span></a>
+      </li>
+      <li>
+        <a href="viewAllAppointments.jsp"><span class="fa fa-trophy mr-3">View All Appointments</span></a>
+      </li>
+      <li>
+        <a href="addAdmin.jsp"><span class="fa fa-home mr-3">Add Admin</span> </a>
+      </li>
+      <li>
+        <a href="changeAdminPassword.jsp"><span class="fa fa-cog mr-3">Change Password</span></a>
       </li>
     </nav>

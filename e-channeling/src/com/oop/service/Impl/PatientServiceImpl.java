@@ -238,8 +238,32 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public void removePatient(String patientID) {
-		// TODO Auto-generated method stub
+	public void removePatient(Long patientID) {
+		if(patientID != null) {
+			try {
+				connection = DBConnectionUtil.getDBConnection();
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_REMOVE_PATIENT));
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_ONE, patientID);
+				preparedStatement.executeUpdate();
+			} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			} finally {
+				/*
+				 * Close prepared statement and database connectivity at the end
+				 * of transaction
+				 */
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+		}
 		
 	}
 

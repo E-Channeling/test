@@ -35,6 +35,12 @@
         ]]>
 	</query>
 	
+	<query id="remove_patient">
+		<![CDATA[
+			delete from patient where id = ?
+		]]>
+	</query>
+	
 	<!-- Select patient by email and password Query -->
 	<query id="patient_by_email_and_password">
          <![CDATA[        
@@ -172,6 +178,18 @@
          <![CDATA[        
             select * from doctor where user_id = ? 
         ]]>
+	</query>
+	
+	<qyery id="get_doctors">
+		<![CDATA[
+			select id, first_name, last_name from doctor
+		]]>
+	</qyery>
+	
+	<query id = "remove_doctor">
+		<![CDATA[
+			delete from doctor where id = ?
+		]]>
 	</query>
 
 	<query id="doctor_login_validate">
@@ -377,6 +395,49 @@
             contact = ?
             where id = ?
         ]]>
+	</query>
+	
+	<query id="all_appointments">
+		<![CDATA[
+			select * from appoiment
+		]]>
+	</query>
+	
+	<query id="admin_change_password">
+		<![CDATA[
+			update admin set password = ? where id = ?
+		]]>
+	</query>
+	
+	<query id="get_admin_user_id">
+		<![CDATA[
+			select user_id from admin where id = ?
+		]]>
+	</query>
+	
+	<query id="get_appointment_by_appointment_id">
+		<![CDATA[
+			select id, patient_id, schedule_id, appoiment_date, status from appoiment where id = ?
+		]]>
+	</query>
+	
+	<query id="remove_appointment">
+		<![CDATA[
+			delete from appoiment where id = ?
+		]]>
+	</query>
+	
+	<query id="update_appointment">
+		<![CDATA[
+			update appoiment set appoiment_date = ?, status = ? where id = ?
+		]]>
+	</query>
+	
+	<query id="add_admin">
+		<![CDATA[
+			insert into admin (user_id, password)
+			values (?, ?)
+		]]>
 	</query>
 
 </Querys>

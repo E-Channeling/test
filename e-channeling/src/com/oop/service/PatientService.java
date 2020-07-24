@@ -47,7 +47,7 @@ public interface PatientService {
 	public void updatePatient(Long id, Patient patient);
 
 
-	public void removePatient(String patientID);
+	public void removePatient(Long patientID);
 	
 
 	public boolean loginValidate(String userID, String password);

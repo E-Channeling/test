@@ -322,6 +322,35 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 	
 	@Override
+	public void deleteDoctor(Long Id) {
+		if(Id != null) {
+			try {
+				connection = DBConnectionUtil.getDBConnection();
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_REMOVE_DOCTOR));
+				preparedStatement.setLong(CommonConstants.COLUMN_INDEX_ONE, Id);
+				preparedStatement.executeUpdate();
+			} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			} finally {
+				/*
+				 * Close prepared statement and database connectivity at the end
+				 * of transaction
+				 */
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					log.log(Level.SEVERE, e.getMessage());
+				}
+			}
+		}
+	}
+	
+	@Override
 	public ArrayList<Doctor> getDoctorByID(String doctorID) {
 		ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
 		try {

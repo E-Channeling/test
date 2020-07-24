@@ -25,7 +25,7 @@
     response.setHeader("Expires", "0"); //Proxiy
     session.getAttribute("id");
            if(session.getAttribute("email") == null)
-               response.sendRedirect("patientLogin.jsp");
+               response.sendRedirect("adminLogin.jsp");
     %>
 <!doctype html>
 <html lang="en">

@@ -82,6 +82,46 @@
    	<servlet-name>UpdateHospitalServlet</servlet-name>
     <servlet-class>com.oop.servlet.UpdateHospitalServlet</servlet-class> 
   </servlet> 
+  <servlet>
+  	<servlet-name>DoctorManageSrevlet</servlet-name>
+  	<servlet-class>com.oop.servlet.DoctorManageSrevlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminUpdateDoctorServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminUpdateDoctorServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PatientManageServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.PatientManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminUpdatePatientServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminUpdatePatientServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminPasswordChangeServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminPasswordChangeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AppointmentManageServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AppointmentManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminUpdateAppointmentServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminUpdateAppointmentServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminAddDoctorServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminAddDoctorServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AddAdminServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AddAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminAddPatientServlet</servlet-name>
+  	<servlet-class>com.oop.servlet.AdminAddPatientServlet</servlet-class>
+  </servlet>
   
  
   <servlet-mapping>
@@ -164,6 +204,47 @@
    <servlet-name>UpdateHospitalServlet</servlet-name>
     <url-pattern>/UpdateHospitalServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DoctorManageSrevlet</servlet-name>
+  	<url-pattern>/DoctorManageSrevlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminUpdateDoctorServlet</servlet-name>
+  	<url-pattern>/AdminUpdateDoctorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PatientManageServlet</servlet-name>
+  	<url-pattern>/PatientManageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminUpdatePatientServlet</servlet-name>
+  	<url-pattern>/AdminUpdatePatientServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminPasswordChangeServlet</servlet-name>
+  	<url-pattern>/AdminPasswordChangeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AppointmentManageServlet</servlet-name>
+  	<url-pattern>/AppointmentManageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminUpdateAppointmentServlet</servlet-name>
+  	<url-pattern>/AdminUpdateAppointmentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminAddDoctorServlet</servlet-name>
+  	<url-pattern>/AdminAddDoctorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddAdminServlet</servlet-name>
+  	<url-pattern>/AddAdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminAddPatientServlet</servlet-name>
+  	<url-pattern>/AdminAddPatientServlet</url-pattern>
+  </servlet-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

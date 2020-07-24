@@ -1,0 +1,124 @@
+package com.oop.servlet;
+
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.oop.model.Admin;
+import com.oop.service.AdminService;
+import com.oop.service.Impl.AdminServiceImpl;
+
+/**
+ * Servlet implementation class AdminPasswordChangeServlet
+ */
+@WebServlet("/AdminPasswordChangeServle")
+public class AdminPasswordChangeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminPasswordChangeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String id = request.getParameter("id");
+		String password = getMd5(request.getParameter("current_password"));
+		String err = "Incorect Password";
+		
+		ArrayList<Admin> adminList = new ArrayList<Admin>(); 
+		AdminService adminService = new AdminServiceImpl();
+		adminList = adminService.findById(id);
+		
+		
+		if(adminService.loginValidate(adminList.get(0).getUserId(), password)) {
+			String newpassword = request.getParameter("new_password");
+			String confirmpassword = request.getParameter("confirm_password");
+			
+			boolean count = true;
+			if (newpassword.length() == confirmpassword.length()) {
+				for(int i = 0; i < newpassword.length(); i++) {
+					if(newpassword.charAt(i) == confirmpassword.charAt(i)) {
+						count = true;
+					}
+					else {
+						count = false;
+						break;
+					}
+				}
+				if(count == true) {
+					adminService.changePassword(id, getMd5(newpassword));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/adminDashbord.jsp");
+					dispatcher.forward(request, response);
+				}
+				else {
+					request.setAttribute("error", err);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changeAdminPassword.jsp");
+					dispatcher.forward(request, response);
+				}
+			} else {
+				request.setAttribute("error", err);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changeAdminPassword.jsp");
+				dispatcher.forward(request, response);
+			}
+		} else {
+			request.setAttribute("error", err);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changeAdminPassword.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+	}
+	
+	public static String getMd5(String input) 
+    { 
+        try { 
+  
+            // Static getInstance method is called with hashing MD5 
+            MessageDigest md = MessageDigest.getInstance("MD5"); 
+  
+            // digest() method is called to calculate message digest 
+            //  of an input digest() return array of byte 
+            byte[] messageDigest = md.digest(input.getBytes()); 
+  
+            // Convert byte array into signum representation 
+            BigInteger no = new BigInteger(1, messageDigest); 
+  
+            // Convert message digest into hex value 
+            String hashtext = no.toString(16); 
+            while (hashtext.length() < 32) { 
+                hashtext = "0" + hashtext; 
+            } 
+            return hashtext; 
+        }  
+  
+        // For specifying wrong message digest algorithms 
+        catch (NoSuchAlgorithmException e) { 
+            throw new RuntimeException(e); 
+        } 
+    }
+
+}

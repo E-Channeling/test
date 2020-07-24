@@ -52,7 +52,7 @@
                             <div class="row h-100">
                                 <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
                                     <header class="entry-header">
-                                        <h1>The Best Way<br>Appoiment Doctor</h1>
+                                        <h1>The Best Way To<br>Appoint A Doctor</h1>
                                     </header><!-- .entry-header -->
                                         <a href="adminLogin.jsp" class="button gradient-bg">Admin Login</a>
                                         <a href="doctorLogin.jsp" class="button gradient-bg">Doctor Login</a> 

@@ -72,6 +72,44 @@ public class AdminServiceImpl implements AdminService {
 		return false;
 	}
 	
+	@Override
+	public void addAdmin(Admin admin) {
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+			/*
+			 * Query is available in EmployeeQuery.xml file and use
+			 * insert_employee key to extract value of it
+			 */
+			preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_INSERT_ADMIN));
+			connection.setAutoCommit(false);
+			
+			
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, admin.getUserId());
+			preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, admin.getPassword());
+			
+			preparedStatement.execute();
+			connection.commit();
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+	}
+	
 	
 	@Override
 	public ArrayList<Admin> findByUserId(String userId) {
@@ -114,6 +152,78 @@ public class AdminServiceImpl implements AdminService {
 			}
 		}
 		return adminList;
+	}
+	
+	@Override
+	public ArrayList<Admin> findById(String id) {
+		ArrayList<Admin> adminList = new ArrayList<Admin>();
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection
+						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUEARY_ADMIN_BY_ID));
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, id);
+				
+				ResultSet resultSet = preparedStatement.executeQuery();
+				
+				while (resultSet.next()) {
+					Admin admin = new Admin();
+					
+					admin.setUserId(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
+					adminList.add(admin);
+				}
+
+
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
+		return adminList;
+	}
+	
+	@Override
+	public void changePassword(String id, String password) {
+		try {
+			connection = DBConnectionUtil.getDBConnection();
+
+				preparedStatement = connection.prepareStatement(QueryUtil.queryByID(CommonConstants.QUEARY_ADMIN_CHANGE_PASSWORD));
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, password);
+				preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, id);
+				
+				preparedStatement.executeUpdate();
+				
+		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+			log.log(Level.SEVERE, e.getMessage());
+		} finally {
+			/*
+			 * Close prepared statement and database connectivity at the end of
+			 * transaction
+			 */
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				log.log(Level.SEVERE, e.getMessage());
+			}
+		}
 	}
 
 }

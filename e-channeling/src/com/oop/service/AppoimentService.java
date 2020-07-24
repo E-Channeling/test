@@ -8,6 +8,10 @@ public interface AppoimentService {
 	
 	public void addAppointment(Appoiment appoiment);
 	
+	public ArrayList<Appoiment> findAll();
+	
+	public ArrayList<Appoiment> findById(Long id);
+	
 	public ArrayList<Appoiment> findByPatientId(Long patientId);
 	
 	public ArrayList<Appoiment> getAllStatusBookedAndPendingByPatientId(Long patientId);
@@ -21,5 +25,9 @@ public interface AppoimentService {
 	public ArrayList<Appoiment> getAllAppoimetByScheduleId(Long sceduleId);
 	
 	public void updateStatusByScheduleId(Long scheduleId, String status);
+	
+	public void deleteAppointment(Long id);
+	
+	public void updateAppointment(Long id, Appoiment appointment);
 
 }

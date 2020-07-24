@@ -143,7 +143,7 @@
 				
 			}
 		}catch (Exception e) {
-			
+			System.out.print(e);
 		}
 			
 	%>

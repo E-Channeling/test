@@ -20,6 +20,7 @@ public interface DoctorService {
 	
 	public boolean loginValidate(String userID, String password);
 	
+	public void deleteDoctor(Long id);
 	
 	public ArrayList<Doctor> getDoctorByID(String doctorID);
 	

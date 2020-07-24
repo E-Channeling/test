@@ -67,7 +67,7 @@
 			<th>Name</th>
 			<th>Contact No</th>
 			<th>Email</th>
-			<th>Specilization</th>
+			<th>Specialization</th>
 			<th>Hospital</th>
 		</tr>
         <%
